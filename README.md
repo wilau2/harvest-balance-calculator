@@ -4,9 +4,15 @@ With this project you can calculate how much overtime or time you owe based on t
 
 # setup
 
--Install python3
+- Install python3
+
 
 # Credentials
+
+- Login to harvest
+
+- Go to `https://id.getharvest.com/developers`
+
 
 create a `config.json.secret` file at root of project.
 
@@ -34,3 +40,7 @@ verify that the configuration in config.json are good for you.
 Harvest will return every time already converted with your timezone
 
 to make sure your user has the good timezone `GET https://api.harvestapp.com/v2/users/me`
+
+# Run 
+
+`python3 main.py`
