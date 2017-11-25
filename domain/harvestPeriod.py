@@ -1,8 +1,8 @@
 import calendar
 
-from configurationLoader import load_configuration_file
-from harvestApi import HarvestApi
-from timeUtils import get_number_of_weeks_between_dates
+from config.loader import load_configuration_file
+from httpclient.harvestApi import HarvestApi
+from utils.timeUtils import get_number_of_weeks_between_dates
 
 
 class HarvestPeriod:

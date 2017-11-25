@@ -1,7 +1,7 @@
 import http.client
 import json
 
-from configurationLoader import load_configuration_file
+from config.loader import load_configuration_file
 
 
 class HarvestApi:

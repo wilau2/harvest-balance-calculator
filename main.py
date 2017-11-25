@@ -1,6 +1,6 @@
-from configurationLoader import load_configuration_file
-from dateStructure import DateStructure
-from harvestPeriod import HarvestPeriod
+from config.loader import load_configuration_file
+from domain.dateStructure import DateStructure
+from domain.harvestPeriod import HarvestPeriod
 
 config = load_configuration_file('config.json')
 
@@ -10,7 +10,6 @@ end_date = DateStructure(config["endDate"])
 harvestPeriod = HarvestPeriod(begin_date, end_date)
 
 total_worked_time = harvestPeriod.get_total_number_of_worked_hours()
-
 total_should_of_worked_time = harvestPeriod.get_total_should_of_worked_time()
 
 diff = total_worked_time - total_should_of_worked_time
