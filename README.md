@@ -23,7 +23,9 @@ verify that the configuration in config.json are good for you.
 
 ```json
 {
-    "hoursPerWeek": "37.5",
+    "beginDate": "2016-5-3",
+    "endDate": "2017-11-24",
+    "hoursPerWeek": "37.5"
 }
 ```
 

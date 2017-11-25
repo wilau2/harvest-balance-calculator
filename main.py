@@ -1,68 +1,29 @@
-import http.client
-import json
+from dateutil.parser import parse
 
 from banner import print_banner
 from configurationLoader import load_configuration_file
-from harvestTime import HarvestTime
+from domain import get_number_of_weeks_worked, get_total_number_of_worked_hours
+from timeUtils import get_monday_from_week_including_date, get_sunday_from_week_including_date, get_day_name_of_week
 
-secret_config = load_configuration_file('config.json.secret')
 config = load_configuration_file('config.json')
 
 print_banner()
 
-harvest_time = HarvestTime()
 
-begin_year = int(input("begin year (default 2017): ") or "2017")
-begin_month = int(input("begin month (default 1): ") or "1")
-begin_day = int(input("begin day (default 1): ") or "1")
-begin_date = harvest_time.create_datetime(begin_year, begin_month, begin_day)
+begin_date = parse(config["beginDate"]).date()
+print("\nThe configuration beginning date is: " + begin_date.isoformat() + " " + get_day_name_of_week(begin_date))
 
-print(" ")
-print("The beginning date is: ")
-print(begin_date.isoformat())
-print(" ")
+end_date = parse(config["endDate"]).date()
+print("\nThe configuration ending date is: " + end_date.isoformat() + " " + get_day_name_of_week(begin_date))
 
-end_year = int(input("end year (default 2017): ") or "2017")
-end_month = int(input("end month (default 1): ") or "1")
-end_day = int(input("end day (default 1): ") or "1")
-end_date = harvest_time.create_datetime(end_year, end_month, end_day)
+beginning_monday = get_monday_from_week_including_date(begin_date)
+ending_sunday = get_sunday_from_week_including_date(end_date)
 
-print(" ")
-print("The ending date is: ")
-print(end_date.isoformat())
-print(" ")
+total_worked_time = get_total_number_of_worked_hours(beginning_monday, ending_sunday)
 
-headers = {
-    "Harvest-Account-ID": secret_config["harvest"]["accountId"],
-    "Authorization": secret_config["harvest"]["authorization"],
-    "User-Agent": "Harvest API Example"
-}
-print(headers)
-conn = http.client.HTTPSConnection("api.harvestapp.com")
+number_of_weeks_worked = get_number_of_weeks_worked(beginning_monday, ending_sunday)
 
-dateFrom = harvest_time.get_begin_of_week(begin_date)
-dateTo = harvest_time.get_end_of_week(end_date)
-
-routes = ["/v2/time_entries?from=" + str(dateFrom.isoformat()) + "&to=" + str(dateTo.isoformat())]
-
-time_entries = []
-while len(routes) > 0:
-    conn.request("GET", routes.pop(), None, headers)
-    response = json.loads(conn.getresponse().read())
-
-    time_entries += response["time_entries"]
-
-    next = response["links"]["next"]
-    if next:
-        routes.append(next)
-
-total_worked_time = 0
-for time_entry in time_entries:
-    total_worked_time += time_entry["hours"]
-
-number_of_weeks = harvest_time.get_number_of_weeks_between_dates(dateFrom, dateTo)
-
-total_should_of_worked_time = (number_of_weeks + 1) * float(config["hoursPerWeek"])
+total_should_of_worked_time = number_of_weeks_worked * float(config["hoursPerWeek"])
 
 diff = total_worked_time - total_should_of_worked_time
 
