@@ -2,14 +2,6 @@
 
 With this project you can calculate how much overtime or time you owe based on the average hours you should work per weeks.
 
-# setup
-
-- Make sure python3 is installed.
-
-- `pip3 install pipenv`
-
-- `pipenv install`
-
 ## Credentials
 
 - Login to harvest
@@ -22,7 +14,7 @@ With this project you can calculate how much overtime or time you owe based on t
 
 ![alt text](https://github.com/wilau2/harvest-balance-calculator/blob/master/docs/harvest_creds_creation_step3.png)
 
-- create a `config.json.secret` file at root of project.
+- create a `config.json.secret` file at root of project with the following configuration and replace the placeholders.
 
 ```json
 {
@@ -43,9 +35,23 @@ With this project you can calculate how much overtime or time you owe based on t
 }
 ```
 
-# Run 
+# RUN WITH DOCKER. 
+##### npm 
+for people with javascript background trying to have fun with a python project.
+- `npm run docker:build`
+- `npm run docker:run`
+##### without npm
+open package.json and paste commands one after the other in your console.
 
-`pipenv run python main.py`
+
+# RUN WITH PYTHON
+
+- Make sure python3 is installed.
+
+- `pip3 install pipenv`
+- `pipenv check`
+- `pipenv install`
+- `pipenv run python main.py`
 
 # Timezone
 

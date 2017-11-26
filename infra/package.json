@@ -1,0 +1,12 @@
+{
+  "name": "harvest-balance-calculator-infra",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "docker:build": "docker build -t williamlauze/harvest-balance-calculator-infra .",
+    "docker:push": "docker push williamlauze/harvest-balance-calculator-infra"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,23 @@
+{
+  "name": "harvest-balance-calculator",
+  "version": "1.0.0",
+  "description": "With this project you can calculate how much overtime or time you owe based on the average hours you should work per weeks.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "docker:build": "docker build -t harvest-balance-calculator .",
+    "docker:run": "docker run harvest-balance-calculator"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wilau2/harvest-balance-calculator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wilau2/harvest-balance-calculator/issues"
+  },
+  "homepage": "https://github.com/wilau2/harvest-balance-calculator#readme"
+}
