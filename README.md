@@ -4,10 +4,13 @@ With this project you can calculate how much overtime or time you owe based on t
 
 # setup
 
-- Install python3
+- Make sure python3 is installed.
 
+- `pip3 install pipenv`
 
-# Credentials
+- `pipenv install`
+
+## Credentials
 
 - Login to harvest
 
@@ -19,7 +22,7 @@ With this project you can calculate how much overtime or time you owe based on t
 
 ![alt text](https://github.com/wilau2/harvest-balance-calculator/blob/master/docs/harvest_creds_creation_step3.png)
 
-create a `config.json.secret` file at root of project.
+- create a `config.json.secret` file at root of project.
 
 ```json
 {
@@ -30,7 +33,7 @@ create a `config.json.secret` file at root of project.
 }
 ```
 
-verify that the configuration in config.json are good for you.
+- verify that the configuration in config.json are good for you.
 
 ```json
 {
@@ -40,12 +43,14 @@ verify that the configuration in config.json are good for you.
 }
 ```
 
+# Run 
+
+`pipenv run python main.py`
+
 # Timezone
+
+Don't worry !
 
 Harvest will return every time already converted with your timezone
 
-to make sure your user has the good timezone `GET https://api.harvestapp.com/v2/users/me`
-
-# Run 
-
-`python3 main.py`
+you can make sure your user has the good timezone ->  `GET https://api.harvestapp.com/v2/users/me`
