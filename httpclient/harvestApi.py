@@ -23,7 +23,8 @@ class HarvestApi:
         results = []
         while len(routes) > 0:
             self.conn.request("GET", routes.pop(), None, headers)
-            response = json.loads(self.conn.getresponse().read())
+            str_response = self.conn.getresponse().read().decode('utf-8')
+            response = json.loads(str_response)
             results += response[array_name]
 
             next_route = response["links"]["next"]
