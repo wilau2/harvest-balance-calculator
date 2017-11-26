@@ -13,6 +13,11 @@ With this project you can calculate how much overtime or time you owe based on t
 
 - Go to `https://id.getharvest.com/developers`
 
+![alt text](https://github.com/wilau2/harvest-balance-calculator/blob/master/docs/harvest_creds_creation_step1.png)
+
+![alt text](https://github.com/wilau2/harvest-balance-calculator/blob/master/docs/harvest_creds_creation_step2.png)
+
+![alt text](https://github.com/wilau2/harvest-balance-calculator/blob/master/docs/harvest_creds_creation_step3.png)
 
 create a `config.json.secret` file at root of project.
 
