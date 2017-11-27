@@ -18,7 +18,7 @@ Make sure to use beginDate and endDate where you have worked full weeks.
 }
 ```
 
-# Run with docker. 
+## Run with docker. 
 ### npm 
 - `npm run docker:build`
 - `npm run docker:run`
@@ -26,7 +26,7 @@ Make sure to use beginDate and endDate where you have worked full weeks.
 - `docker build -t harvest-balance-calculator .`
 - `docker run harvest-balance-calculator`
 
-# Run with python
+## Run with python
 
 - Make sure python3 is installed.
 
@@ -35,10 +35,10 @@ Make sure to use beginDate and endDate where you have worked full weeks.
 - `pipenv install`
 - `pipenv run python main.py`
 
-# Run tests
+## Run tests
 - `pipenv run python -m unittest discover -v`
 
-# Timezone
+## Timezone
 
 Don't worry !
 Harvest will return every time already converted with your timezone
