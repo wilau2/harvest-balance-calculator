@@ -41,7 +41,7 @@ for people with javascript background trying to have fun with a python project.
 - `npm run docker:build`
 - `npm run docker:run`
 ##### without npm
-open package.json and paste commands one after the other in your console.
+open package.json and copy/paste commands one after the other in your console.
 
 
 # RUN WITH PYTHON

@@ -1,15 +1,15 @@
 import calendar
 
+from HarvestBalanceCalculator.HttpClient import HarvestHttpClient
+from HarvestBalanceCalculator.Utils import get_number_of_weeks_between_dates
 from config.loader import load_configuration_file
-from httpclient.harvestApi import HarvestApi
-from utils.timeUtils import get_number_of_weeks_between_dates
 
 
-class HarvestPeriod:
+class WorkPeriod:
     def __init__(self, begin_date, end_date):
         self.begin_monday = begin_date.week.monday()
         self.end_sunday = end_date.week.sunday()
-        self.api = HarvestApi()
+        self.api = HarvestHttpClient()
         self.config = load_configuration_file('config.json')
 
     def get_full_weeks_worked_time_entries(self, a_monday, a_sunday):

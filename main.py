@@ -1,13 +1,13 @@
+from HarvestBalanceCalculator import DateStructure, WorkPeriod
 from config.loader import load_configuration_file
-from domain.dateStructure import DateStructure
-from domain.harvestPeriod import HarvestPeriod
+
 
 config = load_configuration_file('config.json')
 
 begin_date = DateStructure(config["beginDate"])
 end_date = DateStructure(config["endDate"])
 
-harvestPeriod = HarvestPeriod(begin_date, end_date)
+harvestPeriod = WorkPeriod(begin_date, end_date)
 
 total_worked_time = harvestPeriod.get_total_number_of_worked_hours()
 total_should_of_worked_time = harvestPeriod.get_total_should_of_worked_time()
