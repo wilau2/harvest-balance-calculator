@@ -2,30 +2,13 @@
 
 With this project you can calculate how much overtime or time you owe based on the average hours you should work per weeks.
 
-## Credentials
+## Harvest credentials
+[wiki](https://github.com/wilau2/harvest-balance-calculator/wiki/Setting-up-harvest-credentials)
 
-- Login to harvest
+## Usage
 
-- Go to `https://id.getharvest.com/developers`
-
-![alt text](https://github.com/wilau2/harvest-balance-calculator/blob/master/docs/harvest_creds_creation_step1.png)
-
-![alt text](https://github.com/wilau2/harvest-balance-calculator/blob/master/docs/harvest_creds_creation_step2.png)
-
-![alt text](https://github.com/wilau2/harvest-balance-calculator/blob/master/docs/harvest_creds_creation_step3.png)
-
-- create a `config.json.secret` file at root of project with the following configuration and replace the placeholders.
-
-```json
-{
-    "harvest": {
-        "accountId":"superSecretAccountId",
-        "authorization":"Bearer superSecretBearerAuthorizationToken"
-    }
-}
-```
-
-- verify that the configuration in config.json are good for you.
+Make sure to use beginDate and endDate where you have worked full weeks.
+`config.json`
 
 ```json
 {
@@ -35,16 +18,15 @@ With this project you can calculate how much overtime or time you owe based on t
 }
 ```
 
-# RUN WITH DOCKER. 
-##### npm 
-for people with javascript background trying to have fun with a python project.
+# Run with docker. 
+### npm 
 - `npm run docker:build`
 - `npm run docker:run`
-##### without npm
-open package.json and copy/paste commands one after the other in your console.
+### without npm
+- `docker build -t harvest-balance-calculator .`
+- `docker run harvest-balance-calculator`
 
-
-# RUN WITH PYTHON
+# Run with python
 
 - Make sure python3 is installed.
 
@@ -53,10 +35,11 @@ open package.json and copy/paste commands one after the other in your console.
 - `pipenv install`
 - `pipenv run python main.py`
 
+# Run tests
+- `pipenv run python -m unittest discover -v`
+
 # Timezone
 
 Don't worry !
-
 Harvest will return every time already converted with your timezone
-
 you can make sure your user has the good timezone ->  `GET https://api.harvestapp.com/v2/users/me`
