@@ -14,7 +14,7 @@ class HarvestHttpClient:
 
     def get_user_time_entries(self, date_from, date_to):
         headers = {
-            "HarvestBalanceCalculator-Account-ID": self.secret_config["harvest"]["accountId"],
+            "Harvest-Account-ID": self.secret_config["harvest"]["accountId"],
             "Authorization": self.secret_config["harvest"]["authorization"],
             "User-Agent": "HarvestBalanceCalculator API Example"
         }
@@ -27,6 +27,7 @@ class HarvestHttpClient:
             self.conn.request("GET", routes.pop(), None, headers)
             str_response = self.conn.getresponse().read().decode('utf-8')
             response = json.loads(str_response)
+            self.__validate_errors(response)
             results += response[array_name]
 
             next_route = response["links"]["next"]
@@ -34,3 +35,17 @@ class HarvestHttpClient:
                 routes.append(next_route)
 
         return results
+
+    @staticmethod
+    def __validate_errors(json_response):
+        try:
+            error = json_response["error"]
+            raise RuntimeError(error + " " + json_response["error_description"])
+        except KeyError:
+            return
+
+
+
+
+
+

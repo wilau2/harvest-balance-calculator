@@ -1,7 +1,6 @@
 from HarvestBalanceCalculator import DateStructure, WorkPeriod
 from config.loader import load_configuration_file
 
-
 config = load_configuration_file('config.json')
 
 begin_date = DateStructure(config["beginDate"])
