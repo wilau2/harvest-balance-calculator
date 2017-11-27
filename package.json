@@ -8,7 +8,8 @@
   },
   "scripts": {
     "docker:build": "docker build -t harvest-balance-calculator .",
-    "docker:run": "docker run harvest-balance-calculator"
+    "docker:run": "docker run harvest-balance-calculator",
+    "start": "npm run docker:build && npm run docker:run"
   },
   "repository": {
     "type": "git",

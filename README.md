@@ -26,7 +26,6 @@ With this project you can calculate how much overtime or time you owe based on t
 ```
 
 - verify that the configuration in config.json are good for you.
-
 ```json
 {
     "beginDate": "2016-5-3",
@@ -38,8 +37,8 @@ With this project you can calculate how much overtime or time you owe based on t
 # RUN WITH DOCKER. 
 ##### npm 
 for people with javascript background trying to have fun with a python project.
-- `npm run docker:build`
-- `npm run docker:run`
+- `npm run start`
+
 ##### without npm
 open package.json and copy/paste commands one after the other in your console.
 
