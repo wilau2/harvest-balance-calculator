@@ -6,13 +6,18 @@ from HarvestBalanceCalculator import HarvestHttpClient
 
 
 class TestTimeUtils(unittest.TestCase):
-    def test_get_user_time_entries(self):
+    def test_get_user_time_entries_when_error(self):
         with self.assertRaises(RuntimeError):
             self.__given_an_error()
 
-    def test_get_user_time_entries_when_error(self):
+    def test_get_user_time_entry(self):
         result = self.__given_a_single_time_entry()
         expected = [{'expected': True}]
+        self.assertEqual(expected, result)
+
+    def test_get_user_time_entries(self):
+        result = self.__given_multiple_time_entries()
+        expected = [{'expected': 1}, {'expected': 2}]
         self.assertEqual(expected, result)
 
     def test_harvest_http_client_has_good_headers(self):
@@ -31,6 +36,17 @@ class TestTimeUtils(unittest.TestCase):
         harvest_http_client.conn.getresponse.return_value.read.return_value.decode.return_value = """
         {"time_entries":[{"expected":true}],"links":{"next":null}}
         """
+        return harvest_http_client.get_user_time_entries(date_from, date_to)
+
+    def __given_multiple_time_entries(self):
+        date_from = datetime(2017, 1, 1)
+        date_to = datetime(2017, 1, 15)
+        harvest_http_client = self.__given_http_client_with_secret_config_and_http_client()
+        harvest_http_client.conn.getresponse.return_value.read.return_value.decode.side_effect = ["""
+                {"time_entries":[{"expected":1}],"links":{"next":"aNextRoute"}}
+                """, """
+                {"time_entries":[{"expected":2}],"links":{"next":null}}
+                """]
         return harvest_http_client.get_user_time_entries(date_from, date_to)
 
     def __given_an_error(self):

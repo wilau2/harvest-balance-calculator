@@ -11,13 +11,15 @@ class HarvestHttpClient:
         self.HARVEST_API_URL = "api.harvestapp.com"
         self.HARVEST_ACCOUNT_ID_HEADER = "Harvest-Account-ID"
         self.HARVEST_AUTHORIZATION_HEADER = "Authorization"
+        self.HARVEST_USER_AGENT = "User-Agent"
         self.conn = https_connection(self.HARVEST_API_URL)
         self.secret_config = config_loader('config.json.secret')
 
     def get_user_time_entries(self, date_from, date_to):
         headers = {
             self.HARVEST_ACCOUNT_ID_HEADER: self.secret_config["harvest"]["accountId"],
-            self.HARVEST_AUTHORIZATION_HEADER: self.secret_config["harvest"]["authorization"]
+            self.HARVEST_AUTHORIZATION_HEADER: self.secret_config["harvest"]["authorization"],
+            self.HARVEST_USER_AGENT: "HarvestBalanceCalculator API Example"
         }
         routes = ["/v2/time_entries?from=" + date_from.isoformat() + "&to=" + date_to.isoformat()]
         return self.__get_paginated_results("time_entries", routes, headers)
