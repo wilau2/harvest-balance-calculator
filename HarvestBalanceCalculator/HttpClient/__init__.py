@@ -1,1 +1,1 @@
-from HarvestBalanceCalculator.HttpClient.harvestHttpClient import HarvestHttpClient
+from HarvestBalanceCalculator.HttpClient.HarvestHttpClient import HarvestHttpClient

@@ -32,6 +32,7 @@ Make sure to use beginDate and endDate where you have worked full weeks.
 - `pip3 install pipenv`
 - `pipenv check`
 - `pipenv install`
+- `pipenv shell`
 - `pipenv run python main.py`
 
 ## Run tests

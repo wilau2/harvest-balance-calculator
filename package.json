@@ -9,6 +9,7 @@
   "scripts": {
     "docker:build": "docker build -t harvest-balance-calculator .",
     "docker:run": "docker run harvest-balance-calculator",
+    "docker:test": "docker run harvest-balance-calculator python3 -m unittest discover -v",
     "start": "npm run docker:build && npm run docker:run"
   },
   "repository": {
