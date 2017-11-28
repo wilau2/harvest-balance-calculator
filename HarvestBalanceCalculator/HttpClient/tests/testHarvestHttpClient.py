@@ -21,12 +21,12 @@ class TestTimeUtils(unittest.TestCase):
         self.assertEqual(expected, result)
 
     def test_harvest_http_client_has_good_headers(self):
-        harvest_http_client = HarvestHttpClient()
+        harvest_http_client = self.__given_http_client_with_secret_config_and_http_client()
         self.assertEqual("Harvest-Account-ID", harvest_http_client.HARVEST_ACCOUNT_ID_HEADER)
         self.assertEqual("Authorization", harvest_http_client.HARVEST_AUTHORIZATION_HEADER)
 
     def test_harvest_http_client_has_good_url(self):
-        harvest_http_client = HarvestHttpClient()
+        harvest_http_client = self.__given_http_client_with_secret_config_and_http_client()
         self.assertEqual("api.harvestapp.com", harvest_http_client.HARVEST_API_URL)
 
     def __given_a_single_time_entry(self):
@@ -67,6 +67,7 @@ class TestTimeUtils(unittest.TestCase):
             "harvest": {"accountId": "dumpAccountId", "authorization": "dumbAuthorization"}
         }), MagicMock())
         harvest_http_client.conn.request = MagicMock()
+        harvest_http_client.headers = MagicMock()
         return harvest_http_client
 
 
