@@ -30,33 +30,36 @@ class TestTimeUtils(unittest.TestCase):
         self.assertEqual("api.harvestapp.com", harvest_http_client.HARVEST_API_URL)
 
     def __given_a_single_time_entry(self):
-        date_from = datetime(2017, 1, 1)
-        date_to = datetime(2017, 1, 15)
+        a_date_from = datetime(2017, 1, 1)
+        a_date_to = datetime(2017, 1, 1)
+        a_user_id = "aUserId"
         harvest_http_client = self.__given_http_client_with_secret_config_and_http_client()
         harvest_http_client.conn.getresponse.return_value.read.return_value.decode.return_value = """
         {"time_entries":[{"expected":true}],"links":{"next":null}}
         """
-        return harvest_http_client.get_user_time_entries(date_from, date_to)
+        return harvest_http_client.get_user_time_entries(a_date_from, a_date_to, a_user_id)
 
     def __given_multiple_time_entries(self):
-        date_from = datetime(2017, 1, 1)
-        date_to = datetime(2017, 1, 15)
+        a_date_from = datetime(2017, 1, 1)
+        a_date_to = datetime(2017, 1, 1)
+        a_user_id = "aUserId"
         harvest_http_client = self.__given_http_client_with_secret_config_and_http_client()
         harvest_http_client.conn.getresponse.return_value.read.return_value.decode.side_effect = ["""
                 {"time_entries":[{"expected":1}],"links":{"next":"aNextRoute"}}
                 """, """
                 {"time_entries":[{"expected":2}],"links":{"next":null}}
                 """]
-        return harvest_http_client.get_user_time_entries(date_from, date_to)
+        return harvest_http_client.get_user_time_entries(a_date_from, a_date_to, a_user_id)
 
     def __given_an_error(self):
-        date_from = datetime(2017, 1, 1)
-        date_to = datetime(2017, 1, 15)
+        a_date_from = datetime(2017, 1, 1)
+        a_date_to = datetime(2017, 1, 1)
+        a_user_id = "aUserId"
         harvest_http_client = self.__given_http_client_with_secret_config_and_http_client()
         harvest_http_client.conn.getresponse.return_value.read.return_value.decode.return_value = """
         {"error":"AnError","error_description":"A description"}
         """
-        return harvest_http_client.get_user_time_entries(date_from, date_to)
+        return harvest_http_client.get_user_time_entries(a_date_from, a_date_to, a_user_id)
 
     @staticmethod
     def __given_http_client_with_secret_config_and_http_client():
