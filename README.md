@@ -7,39 +7,39 @@ With this project you can calculate how much overtime or time you owe based on t
 
 ## Usage
 
-Make sure to use beginDate and endDate where you have worked full weeks.
 `config.json`
-
 ```json
 {
-    "beginDate": "2016-5-3",
+    "beginDate": "2016-5-2",
     "endDate": "2017-11-24",
-    "hoursPerWeek": "37.5"
+    "hoursPerWorkWeek": "37.5",
+    "hoursPerWorkDay": "7.5",
+    "workDaysOfTheWeek": [0, 1, 2, 3, 4]
 }
 ```
+*workDaysOfTheWeek where 0 is monday
 
-## Run with docker. 
-### npm 
-- `npm run start`
-### without npm
+## Run 
+### Docker
 - `docker build -t harvest-balance-calculator .`
 - `docker run harvest-balance-calculator`
 
-## Run with python
+### Python
 
 - Make sure python3 is installed.
-
 - `pip3 install pipenv`
 - `pipenv check`
 - `pipenv install`
 - `pipenv shell`
 - `pipenv run python main.py`
 
-## Run tests
+## Tests
+### Docker
+- `docker run harvest-balance-calculator python3 -m unittest discover -v`
+### Python
 - `pipenv run python -m unittest discover -v`
 
 ## Timezone
-
 Don't worry !
 Harvest will return every time already converted with your timezone
 you can make sure your user has the good timezone ->  `GET https://api.harvestapp.com/v2/users/me`
