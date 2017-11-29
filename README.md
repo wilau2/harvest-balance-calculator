@@ -12,7 +12,6 @@ With this project you can calculate how much overtime or time you owe based on t
 {
     "beginDate": "2016-5-2",
     "endDate": "2017-11-24",
-    "hoursPerWorkWeek": "37.5",
     "hoursPerWorkDay": "7.5",
     "workDaysOfTheWeek": [0, 1, 2, 3, 4]
 }
