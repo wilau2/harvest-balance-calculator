@@ -1,0 +1,67 @@
+version: 2
+references:
+  container_config: &docker_container_config
+    docker:
+      - image: docker:17.09.0-ce-git
+    working_directory: ~/docker
+
+jobs:
+  build_and_push_infra_docker_image:
+    <<: *docker_container_config
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 17.07.0-ce
+          docker_layer_caching: true
+      - run:
+          name: build_and_push_infra_docker_image
+          command: |
+            TAG=0.1.$CIRCLE_WORKFLOW_ID
+            COMMIT_RANGE=$(echo "${CIRCLE_COMPARE_URL}" | cut -d/ -f7)
+            if git diff --name-only $COMMIT_RANGE -r | grep -q infra/Dockerfile ; then
+              cd infra
+              docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
+              docker build -t williamlauze/harvest-balance-calculator-infra:$TAG .
+              docker push williamlauze/harvest-balance-calculator-infra:$TAG
+              docker tag williamlauze/harvest-balance-calculator-infra:$TAG williamlauze/harvest-balance-calculator-infra:latest
+              docker push williamlauze/harvest-balance-calculator-infra:latest
+            fi
+  build_and_push_application_docker_image_new_version:
+    <<: *docker_container_config
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 17.07.0-ce
+          docker_layer_caching: true
+      - run:
+          name: build_and_push_application_docker_image_new_version
+          command: |
+            TAG=0.1.$CIRCLE_WORKFLOW_ID
+            docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
+            docker build -t williamlauze/harvest-balance-calculator:$TAG .
+            docker push williamlauze/harvest-balance-calculator:$TAG
+  integration_test:
+    <<: *docker_container_config
+    steps:
+      - setup_remote_docker:
+          version: 17.07.0-ce
+          docker_layer_caching: true
+      - run:
+          name: integration_test
+          command: |
+            TAG=0.1.$CIRCLE_WORKFLOW_ID
+            docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
+            docker pull williamlauze/harvest-balance-calculator:$TAG
+            docker run williamlauze/harvest-balance-calculator:$TAG python3 -m unittest discover -v
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build_and_push_infra_docker_image
+      - build_and_push_application_docker_image_new_version:
+          requires:
+            - build_and_push_infra_docker_image
+      - integration_test:
+          requires:
+            - build_and_push_application_docker_image_new_version

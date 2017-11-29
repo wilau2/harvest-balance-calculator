@@ -30,3 +30,4 @@ if diff > 0:
 else:
     print("You owe big brother")
     print(diff)
+
