@@ -16,17 +16,17 @@ jobs:
       - run:
           name: build_and_push_infra_docker_image
           command: |
-            TAG=0.1.$CIRCLE_WORKFLOW_ID
+            TAG=0.1.${CIRCLE_WORKFLOW_ID}
             COMMIT_RANGE=$(echo "${CIRCLE_COMPARE_URL}" | cut -d/ -f7)
-            if git diff --name-only $COMMIT_RANGE -r | grep -q infra/Dockerfile ; then
+            if git diff --name-only ${COMMIT_RANGE} -r | grep -q infra/Dockerfile ; then
               cd infra
-              docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
-              docker build -t williamlauze/harvest-balance-calculator-infra:$TAG .
-              docker push williamlauze/harvest-balance-calculator-infra:$TAG
-              docker tag williamlauze/harvest-balance-calculator-infra:$TAG williamlauze/harvest-balance-calculator-infra:latest
-              docker push williamlauze/harvest-balance-calculator-infra:latest
+              docker login -u ${DOCKERHUB_USER} -p ${DOCKERHUB_PASSWORD}
+              docker build -t ${DOCKERHUB_USER}/${DOCKER_INFRA_IMG_NAME}:${TAG} .
+              docker push ${DOCKERHUB_USER}/${DOCKER_INFRA_IMG_NAME}:${TAG}
+              docker tag ${DOCKERHUB_USER}/${DOCKER_INFRA_IMG_NAME}:${TAG} ${DOCKERHUB_USER}/${DOCKER_INFRA_IMG_NAME}:latest
+              docker push ${DOCKERHUB_USER}/${DOCKER_INFRA_IMG_NAME}:latest
             fi
-  build_and_push_application_docker_image_new_version:
+  integration_test:
     <<: *docker_container_config
     steps:
       - checkout
@@ -34,34 +34,18 @@ jobs:
           version: 17.07.0-ce
           docker_layer_caching: true
       - run:
-          name: build_and_push_application_docker_image_new_version
-          command: |
-            TAG=0.1.$CIRCLE_WORKFLOW_ID
-            docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
-            docker build -t williamlauze/harvest-balance-calculator:$TAG .
-            docker push williamlauze/harvest-balance-calculator:$TAG
-  integration_test:
-    <<: *docker_container_config
-    steps:
-      - setup_remote_docker:
-          version: 17.07.0-ce
-          docker_layer_caching: true
-      - run:
           name: integration_test
           command: |
-            TAG=0.1.$CIRCLE_WORKFLOW_ID
-            docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
-            docker pull williamlauze/harvest-balance-calculator:$TAG
-            docker run williamlauze/harvest-balance-calculator:$TAG python3 -m unittest discover -v
+            TAG=0.1.${CIRCLE_WORKFLOW_ID}
+            docker login -u ${DOCKERHUB_USER} -p ${DOCKERHUB_PASSWORD}
+            docker build -t ${DOCKERHUB_USER}/${DOCKER_APP_IMG_NAME}:${TAG} .
+            docker run ${DOCKERHUB_USER}/${DOCKER_APP_IMG_NAME}:${TAG} python3 -m unittest discover -v
 
 workflows:
   version: 2
   build_and_test:
     jobs:
       - build_and_push_infra_docker_image
-      - build_and_push_application_docker_image_new_version:
-          requires:
-            - build_and_push_infra_docker_image
       - integration_test:
           requires:
-            - build_and_push_application_docker_image_new_version
+            - build_and_push_infra_docker_image
