@@ -2,7 +2,7 @@ import unittest
 from datetime import datetime
 from unittest.mock import MagicMock
 
-from HarvestBalanceCalculator import HarvestHttpClient
+from HarvestHttpClient import Client
 
 
 class TestTimeUtils(unittest.TestCase):
@@ -63,7 +63,7 @@ class TestTimeUtils(unittest.TestCase):
 
     @staticmethod
     def __given_http_client_with_secret_config_and_http_client():
-        harvest_http_client = HarvestHttpClient(MagicMock(return_value={
+        harvest_http_client = Client.HarvestHttpClient(MagicMock(return_value={
             "harvest": {"accountId": "dumpAccountId", "authorization": "dumbAuthorization"}
         }), MagicMock())
         harvest_http_client.conn.request = MagicMock()

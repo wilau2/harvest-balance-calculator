@@ -1,5 +1,4 @@
 from HarvestBalanceCalculator.Config import Loader
-from HarvestBalanceCalculator.HttpClient import HarvestHttpClient
 from HarvestBalanceCalculator.HarvestTimeEntries import HarvestTimeEntries
 from HarvestBalanceCalculator.WorkingPreference import WorkingPreference
 from HarvestBalanceCalculator.WorkingTimeInterval import WorkingTimeInterval
