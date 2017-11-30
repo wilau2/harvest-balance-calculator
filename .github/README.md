@@ -42,3 +42,6 @@ With this project you can calculate how much overtime or time you owe based on t
 Don't worry !
 Harvest will return every time already converted with your timezone
 you can make sure your user has the good timezone ->  `GET https://api.harvestapp.com/v2/users/me`
+
+## Beer
+If you like this project and want to help. You can buy me a beer [here](https://www.paypal.me/williamlauze)
