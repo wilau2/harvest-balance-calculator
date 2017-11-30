@@ -1,6 +1,6 @@
 import unittest
 
-from HarvestBalanceCalculator.Config.Loader import load_configuration_file
+from Config.Loader import load_configuration_file
 
 
 class TestLoader(unittest.TestCase):

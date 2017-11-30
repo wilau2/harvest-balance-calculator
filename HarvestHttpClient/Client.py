@@ -1,7 +1,7 @@
 import http.client
 import json
 
-from HarvestBalanceCalculator.Config.Loader import load_configuration_file
+from Config.Loader import load_configuration_file
 
 
 class HarvestHttpClient:

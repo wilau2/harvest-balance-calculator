@@ -1,5 +1,5 @@
+from Config.Loader import load_configuration_file
 from HarvestBalanceCalculator import WorkingTimeInterval, HarvestTimeEntries
-from HarvestBalanceCalculator.Config.Loader import load_configuration_file
 from HarvestHttpClient.Client import HarvestHttpClient
 
 working_time_interval = WorkingTimeInterval(load_configuration_file('config.json'))
