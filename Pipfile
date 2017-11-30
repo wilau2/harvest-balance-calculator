@@ -15,6 +15,7 @@ pycodestyle = "*"
 [dev-packages]
 
 
-[requires]
-python_version = "3.6"
 
+[requires]
+
+python_version = "3.6"

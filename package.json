@@ -13,7 +13,9 @@
     "docker:codestyle": "docker run harvest-balance-calculator pycodestyle HarvestBalanceCalculator",
     "docker:start": "npm run docker:build && npm run docker:run",
     "docker:test": "npm run docker:build && npm run docker:codestyle && npm run docker:teststep",
-    "codestyle": "pipenv run pycodestyle HarvestBalanceCalculator"
+    "codestyle": "pipenv run pycodestyle HarvestBalanceCalculator",
+    "test": "pipenv run python -m unittest discover -v",
+    "start": "pipenv run python main.py"
   },
   "repository": {
     "type": "git",
