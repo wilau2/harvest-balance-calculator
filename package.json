@@ -9,9 +9,11 @@
   "scripts": {
     "docker:build": "docker build -t harvest-balance-calculator .",
     "docker:run": "docker run harvest-balance-calculator",
-    "docker:test": "docker run harvest-balance-calculator python3 -m unittest discover -v",
-    "start": "npm run docker:build && npm run docker:run",
-    "test": "npm run docker:build && npm run docker:test"
+    "docker:teststep": "docker run harvest-balance-calculator python3 -m unittest discover -v",
+    "docker:codestyle": "docker run harvest-balance-calculator pycodestyle HarvestBalanceCalculator",
+    "docker:start": "npm run docker:build && npm run docker:run",
+    "docker:test": "npm run docker:build && npm run docker:codestyle && npm run docker:teststep",
+    "codestyle": "pipenv run pycodestyle HarvestBalanceCalculator"
   },
   "repository": {
     "type": "git",
