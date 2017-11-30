@@ -58,9 +58,3 @@ class HarvestHttpClient:
             raise RuntimeError(error + " " + json_response["error_description"])
         except KeyError:
             return
-
-
-
-
-
-

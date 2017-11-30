@@ -9,6 +9,7 @@ name = "pypi"
 
 python-dateutil = "*"
 isoweek = "*"
+pycodestyle = "*"
 
 
 [dev-packages]
