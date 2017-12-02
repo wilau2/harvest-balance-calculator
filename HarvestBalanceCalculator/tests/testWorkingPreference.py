@@ -3,9 +3,12 @@ from datetime import datetime
 from HarvestBalanceCalculator import WorkingPreference
 
 config = {
-    "workDaysOfTheWeek": [0, 1, 2],
-    "hoursPerWorkDay": 7
+    "preference": {
+        "hoursPerDay": 7,
+        "daysOfWork": [0, 1, 2]
+    }
 }
+
 working_preference = WorkingPreference(config)
 a_monday = datetime(2016, 5, 2)
 a_tuesday = datetime(2016, 5, 3)

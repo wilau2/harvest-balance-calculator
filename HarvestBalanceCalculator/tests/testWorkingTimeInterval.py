@@ -2,10 +2,14 @@ import unittest
 from HarvestBalanceCalculator import WorkingTimeInterval
 
 config = {
-    "beginDate": "2016-5-2",
-    "endDate": "2016-5-8",
-    "workDaysOfTheWeek": [0, 1, 2],
-    "hoursPerWorkDay": 7
+    "period": {
+        "begin": "2016-5-2",
+        "end": "2016-5-8"
+    },
+    "preference": {
+        "hoursPerDay": 7,
+        "daysOfWork": [0, 1, 2]
+    }
 }
 working_time_interval = WorkingTimeInterval(config)
 

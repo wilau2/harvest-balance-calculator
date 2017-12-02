@@ -1,0 +1,10 @@
+{
+    "period": {
+        "begin": "2016-5-2",
+        "end": "2017-11-24"
+    },
+    "preference": {
+        "hoursPerDay": "7.5",
+        "daysOfWork": [0, 1, 2, 3, 4]
+    }
+}

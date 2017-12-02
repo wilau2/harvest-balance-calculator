@@ -13,6 +13,7 @@
     "docker:codestyle": "docker run harvest-balance-calculator pycodestyle HarvestBalanceCalculator",
     "docker:start": "npm run docker:build && npm run docker:run",
     "docker:test": "npm run docker:build && npm run docker:codestyle && npm run docker:teststep",
+    "docker:coverage": "coverage report",
     "codestyle": "pipenv run pycodestyle HarvestBalanceCalculator",
     "test": "pipenv run python -m unittest discover -v",
     "test:coverage": "pipenv run coverage report",
