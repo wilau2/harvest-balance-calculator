@@ -12,6 +12,7 @@ isoweek = "*"
 pycodestyle = "*"
 pygithub = "*"
 funcy = "*"
+coverage = "*"
 
 
 [dev-packages]

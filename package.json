@@ -15,6 +15,7 @@
     "docker:test": "npm run docker:build && npm run docker:codestyle && npm run docker:teststep",
     "codestyle": "pipenv run pycodestyle HarvestBalanceCalculator",
     "test": "pipenv run python -m unittest discover -v",
+    "test:coverage": "pipenv run coverage report",
     "start": "pipenv run python main.py"
   },
   "repository": {

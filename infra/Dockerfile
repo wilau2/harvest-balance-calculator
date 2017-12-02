@@ -5,3 +5,4 @@ RUN pip3 install isoweek
 RUN pip3 install pycodestyle
 RUN pip3 install PyGithub
 RUN pip3 install funcy
+RUN pip3 install coverage
