@@ -11,6 +11,7 @@ python-dateutil = "*"
 isoweek = "*"
 pycodestyle = "*"
 pygithub = "*"
+funcy = "*"
 
 
 [dev-packages]

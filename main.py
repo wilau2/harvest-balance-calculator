@@ -12,6 +12,8 @@ print(total_should_of_worked_time)
 harvest_http_client = HarvestHttpClient()
 user_id = harvest_http_client.get_me()["id"]
 
+harvest_http_client.patch_single_time_entry("708301875", {"notes": "from the python script"})
+
 time_entries = harvest_http_client.get_user_time_entries(
     working_time_interval.begin_date,
     working_time_interval.end_date,
@@ -19,8 +21,10 @@ time_entries = harvest_http_client.get_user_time_entries(
 )
 
 harvest_time_entries = HarvestTimeEntries(time_entries)
-total_worked_time = harvest_time_entries.get_total_worked_time()
 
+harvest_time_entries.print_all()
+
+total_worked_time = harvest_time_entries.get_total_worked_time()
 print("total_worked_time")
 print(total_worked_time)
 
@@ -31,4 +35,11 @@ if diff > 0:
 else:
     print("You owe big brother")
     print(diff)
+
+print("clients")
+clients = harvest_time_entries.get_clients()
+print(clients)
+
+
+
 

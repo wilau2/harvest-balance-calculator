@@ -7,8 +7,8 @@ from HarvestBalanceCalculator import WorkingPreference
 class WorkingTimeInterval:
     def __init__(self, config):
         self.working_preference = WorkingPreference(config)
-        self.begin_date = parse(config["beginDate"]).date()
-        self.end_date = parse(config["endDate"]).date()
+        self.begin_date = parse(config["period"]["begin"]).date()
+        self.end_date = parse(config["period"]["end"]).date()
 
     def get_number_of_working_days(self):
         delta = (self.end_date - self.begin_date)

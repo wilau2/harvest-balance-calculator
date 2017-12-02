@@ -1,6 +1,10 @@
 {
-    "beginDate": "2017-11-24",
-    "endDate": "2017-11-29",
-    "hoursPerWorkDay": "7.5",
-    "workDaysOfTheWeek": [0, 1, 2, 3, 4]
+    "period": {
+        "begin": "2017-11-27",
+        "end": "2017-11-27"
+    },
+    "preference": {
+        "hoursPerDay": "7.5",
+        "daysOfWork": [0, 1, 2, 3, 4]
+    }
 }
