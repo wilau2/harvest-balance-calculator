@@ -32,7 +32,7 @@ class TestWorkingPreference(unittest.TestCase):
         self.assertEqual(False, working_preference.is_a_working_day(a_sunday))
 
     def test_get_hours_per_day(self):
-        self.assertEqual(7, working_preference.hours_per_day)
+        self.assertEqual(7, working_preference.get_hours_per_day())
 
 
 if __name__ == '__main__':

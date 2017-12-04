@@ -24,13 +24,20 @@ class HarvestHttpClient:
         route = "/v2/users/me"
         return self.__get_single_result(route)
 
+    def get_user_time_entries_for_project(self, date_from, date_to, user_id, client_id, project_id):
+        routes = ["/v2/time_entries"
+                  "?from=" + date_from.isoformat() +
+                  "&to=" + date_to.isoformat() +
+                  "&user_id=" + str(user_id) +
+                  "&client_id=" + str(client_id) +
+                  "&project_id=" + str(project_id)]
+        return self.__get_all_paginated_results("time_entries", routes)
+
     def get_user_time_entries(self, date_from, date_to, user_id):
-        routes = ["/v2/time_entries?from=" +
-                  date_from.isoformat() +
-                  "&to=" +
-                  date_to.isoformat() +
-                  "&user_id=" +
-                  str(user_id)]
+        routes = ["/v2/time_entries"
+                  "?from=" + date_from.isoformat() +
+                  "&to=" + date_to.isoformat() +
+                  "&user_id=" + str(user_id)]
         return self.__get_all_paginated_results("time_entries", routes)
 
     def patch_single_time_entry(self, time_entry_id, body):
