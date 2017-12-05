@@ -15,7 +15,7 @@ user_id = harvest_http_client.get_me()["id"]
 harvest_http_client.patch_single_time_entry("708301875", {"notes": "from the python script"})
 
 time_entries = harvest_http_client.get_user_time_entries(
-    working_time_interval.begin,
+    working_time_interval.start,
     working_time_interval.end,
     user_id
 )
