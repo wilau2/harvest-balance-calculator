@@ -1,6 +1,6 @@
 import unittest
 from datetime import datetime
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, Mock
 
 from HarvestHttpClient import Client
 
@@ -28,6 +28,14 @@ class TestTimeUtils(unittest.TestCase):
     def test_harvest_http_client_has_good_url(self):
         harvest_http_client = self.__given_http_client_with_secret_config_and_http_client()
         self.assertEqual("api.harvestapp.com", harvest_http_client.HARVEST_API_URL)
+
+    def test_given_harvest_api_404(self):
+        harvest_http_client = self.__given_http_client_with_secret_config_and_http_client()
+        mock = Mock()
+        mock.status = 404
+        harvest_http_client.conn.getresponse.return_value = mock
+        with self.assertRaises(RuntimeError):
+            harvest_http_client.get_me()
 
     def __given_a_single_time_entry(self):
         a_date_from = datetime(2017, 1, 1)
@@ -66,9 +74,14 @@ class TestTimeUtils(unittest.TestCase):
         harvest_http_client = Client.HarvestHttpClient(MagicMock(return_value={
             "harvest": {"accountId": "dumpAccountId", "authorization": "dumbAuthorization"}
         }), MagicMock())
+        mock = Mock()
+        mock.status = 200
+        harvest_http_client.conn.getresponse.return_value = mock
         harvest_http_client.conn.request = MagicMock()
         harvest_http_client.headers = MagicMock()
         return harvest_http_client
+
+
 
 
 if __name__ == '__main__':

@@ -35,8 +35,14 @@ class HarvestHttpClient:
 
     def __get_single_result(self, route, headers):
         self.conn.request("GET", route, None, headers)
-        str_response = self.conn.getresponse().read().decode('utf-8')
-        response = json.loads(str_response)
+        response = self.conn.getresponse()
+        status = response.status
+        if status != 200:
+            raise RuntimeError(
+                'Something bad happened. Http code: {0} returned by harvest api. '
+                'Check the doc and validate the Authorization token format, '
+                'it should start with Bearer'.format(status))
+        response = json.loads(response.read().decode('utf-8'))
         self.__validate_errors(response)
         return response
 
