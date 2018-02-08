@@ -16,10 +16,11 @@ With this project you can calculate how much overtime or time you owe based on t
     "workDaysOfTheWeek": [0, 1, 2, 3, 4]
 }
 ```
-*workDaysOfTheWeek where 0 is monday
+- workDaysOfTheWeek where 0 is monday
 
 ## Run 
 ### Docker
+Each time you change your configuration files, you have to build the docker image with the following command.
 - `docker build -t harvest-balance-calculator .`
 - `docker run harvest-balance-calculator`
 
