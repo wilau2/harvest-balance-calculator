@@ -15,3 +15,8 @@ Read and follow according template
 ## Issues process
 
 Read and follow according template
+
+
+## commitizen + cz-conventional-changelog
+
+https://github.com/commitizen/cz-cli
