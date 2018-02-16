@@ -1,4 +1,5 @@
-from Config.Loader import save_json_file, filter_list_manually_boolean, retrieve_index_manually_from_list
+from Config.Loader import save_json_file, filter_list_manually_boolean, retrieve_index_manually_from_list, \
+    load_configuration_file
 from GithubCommit.GithubCommit import GithubCommit
 from HarvestBalanceCalculator import WorkingTimeInterval, HarvestTimeEntries
 from HarvestHttpClient.Client import HarvestHttpClient
@@ -6,7 +7,7 @@ from HarvestHttpClient.Client import HarvestHttpClient
 
 def get_all_harvest_clients_for_current_user_and_period():
     print("Retrieving the clients you worked for during the configured interval in Harvest")
-    time_interval = WorkingTimeInterval()
+    time_interval = WorkingTimeInterval(load_configuration_file('config.json'))
     print(" ")
     print("Configured time interval:")
     time_interval.print_interval()
@@ -33,7 +34,7 @@ def get_all_harvest_clients_for_current_user_and_period():
 def select_github_organizations_to_track():
     print(" ")
     print("Retrieving the repositories you worked on during the configured interval in Github")
-    time_interval = WorkingTimeInterval()
+    time_interval = WorkingTimeInterval(load_configuration_file('config.json'))
     github_commit = GithubCommit()
     github_objects_with_commits = github_commit.get_github_organizations_and_repositories_with_commits_in_interval(
         time_interval.startDatetime, time_interval.endDatetime)

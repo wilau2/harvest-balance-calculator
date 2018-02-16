@@ -1,9 +1,5 @@
-from Config.Loader import load_configuration_file
-
-
 class WorkingPreference:
-    def __init__(self, config_loader=load_configuration_file):
-        config = config_loader('config.json')
+    def __init__(self, config):
         self.preference = config["preference"]
         self.workdays = self.preference["daysOfWork"]
         self.hours_per_day = float(self.preference["hoursPerDay"])

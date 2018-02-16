@@ -1,14 +1,12 @@
 from datetime import timedelta
 from dateutil.parser import parse
 
-from Config.Loader import load_configuration_file
 from HarvestBalanceCalculator import WorkingPreference
 
 
 class WorkingTimeInterval:
-    def __init__(self, config_loader=load_configuration_file):
-        config = config_loader('config.json')
-        self.working_preference = WorkingPreference()
+    def __init__(self, config):
+        self.working_preference = WorkingPreference(config)
         self.startDatetime = parse(config["period"]["begin"])
         self.endDatetime = parse(config["period"]["end"])
         self.start = self.startDatetime.date()

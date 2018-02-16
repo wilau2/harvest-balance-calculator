@@ -39,9 +39,40 @@ Each time you change your configuration files, you have to build the docker imag
 ### Python
 - `pipenv run python -m unittest discover -v`
 
+
+## Synchronizing commit description with harvest tasks
+
+First, you need to configure what you want to track
+most people have open source projects contribution they want to exclude from this
+This will select the organization and the repositories you want to track on github
+
+```
+pipenv run python configuration.py
+```
+
+Afterwards, you want to map each repository to an harvest client
+
+```
+pipenv run python configuration2.py
+```
+if you take a look at your configuration.json.secret the following information will be added
+```
+"links": [
+    {
+      "repository": 81864385,
+      "project": 12990453
+    },
+    {
+      "repository": 101913270,
+      "project": 12990453
+    }
+]
+```
+
+
+
 ## Timezone
-Don't worry !
-Harvest will return every time already converted with your timezone
+Don't worry! Harvest will return every time already converted with your timezone
 you can make sure your user has the good timezone ->  `GET https://api.harvestapp.com/v2/users/me`
 
 ## Beer

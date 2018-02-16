@@ -12,7 +12,7 @@ print(total_should_of_worked_time)
 harvest_http_client = HarvestHttpClient()
 user_id = harvest_http_client.get_me()["id"]
 
-harvest_http_client.patch_single_time_entry("708301875", {"notes": "from the python script"})
+# harvest_http_client.patch_single_time_entry("708301875", {"notes": "from the python script"})
 
 time_entries = harvest_http_client.get_user_time_entries(
     working_time_interval.start,
