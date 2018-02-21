@@ -4,6 +4,10 @@ references:
     docker:
       - image: docker:17.09.0-ce-git
     working_directory: ~/docker
+  container_config: &circleci-validate-commit-msg
+    docker:
+      - image: williamlauze/circleci-validate-commit-msg:latest
+    working_directory: /www
 
 jobs:
   build_and_push_infra_docker_image:
@@ -40,11 +44,20 @@ jobs:
             docker login -u ${DOCKERHUB_USER} -p ${DOCKERHUB_PASSWORD}
             docker build -t ${DOCKERHUB_USER}/${DOCKER_APP_IMG_NAME}:${TAG} .
             docker run ${DOCKERHUB_USER}/${DOCKER_APP_IMG_NAME}:${TAG} python3 -m unittest discover -v
-
+  validate_commitizen:
+    <<: *circleci-validate-commit-msg
+    steps:
+      - checkout
+      - run:
+          name:
+          command: |
+            COMMIT_RANGE=$(echo "${CIRCLE_COMPARE_URL}" | cut -d/ -f7)
+            sh /.scripts/validate-commit-message.sh ${COMMIT_RANGE}
 workflows:
   version: 2
   build_and_test:
     jobs:
+      - validate_commitizen
       - build_and_push_infra_docker_image
       - integration_test:
           requires:
