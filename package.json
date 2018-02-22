@@ -26,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/wilau2/harvest-balance-calculator/issues"
   },
-  "homepage": "https://github.com/wilau2/harvest-balance-calculator#readme"
+  "homepage": "https://github.com/wilau2/harvest-balance-calculator#readme",
+  "devDependencies": {
+    "validate-commit-msg": "^2.14.0"
+  }
 }
