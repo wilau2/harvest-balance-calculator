@@ -3,9 +3,12 @@ from datetime import datetime
 from HarvestBalanceCalculator import WorkingPreference
 
 config = {
-    "workDaysOfTheWeek": [0, 1, 2],
-    "hoursPerWorkDay": 7
+    "preference": {
+        "hoursPerDay": 7,
+        "daysOfWork": [0, 1, 2]
+    }
 }
+
 working_preference = WorkingPreference(config)
 a_monday = datetime(2016, 5, 2)
 a_tuesday = datetime(2016, 5, 3)
@@ -29,7 +32,7 @@ class TestWorkingPreference(unittest.TestCase):
         self.assertEqual(False, working_preference.is_a_working_day(a_sunday))
 
     def test_get_hours_per_day(self):
-        self.assertEqual(7, working_preference.hours_per_day)
+        self.assertEqual(7, working_preference.get_hours_per_day())
 
 
 if __name__ == '__main__':

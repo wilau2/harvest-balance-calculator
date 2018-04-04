@@ -1,7 +1,7 @@
 import http.client
 import json
 
-from HarvestBalanceCalculator.Config.Loader import load_configuration_file
+from Config.Loader import load_configuration_file
 
 
 class HarvestHttpClient:
@@ -22,19 +22,35 @@ class HarvestHttpClient:
 
     def get_me(self):
         route = "/v2/users/me"
-        return self.__get_single_result(route, self.headers)
+        return self.__get_single_result(route)
+
+    def get_user_time_entries_for_project(self, date_from, date_to, user_id, client_id, project_id):
+        routes = ["/v2/time_entries"
+                  "?from=" + date_from.isoformat() +
+                  "&to=" + date_to.isoformat() +
+                  "&user_id=" + str(user_id) +
+                  "&client_id=" + str(client_id) +
+                  "&project_id=" + str(project_id)]
+        return self.__get_all_paginated_results("time_entries", routes)
 
     def get_user_time_entries(self, date_from, date_to, user_id):
-        routes = ["/v2/time_entries?from=" +
-                  date_from.isoformat() +
-                  "&to=" +
-                  date_to.isoformat() +
-                  "&user_id=" +
-                  str(user_id)]
-        return self.__get_all_paginated_results("time_entries", routes, self.headers)
+        routes = ["/v2/time_entries"
+                  "?from=" + date_from.isoformat() +
+                  "&to=" + date_to.isoformat() +
+                  "&user_id=" + str(user_id)]
+        return self.__get_all_paginated_results("time_entries", routes)
 
-    def __get_single_result(self, route, headers):
-        self.conn.request("GET", route, None, headers)
+    def patch_single_time_entry(self, time_entry_id, body):
+        route = "/v2/time_entries/" + time_entry_id
+        self.__patch(route, body)
+
+    def __get_single_result(self, route):
+        self.conn.request("GET", route, None, self.headers)
+        json_response = self.__retrieve_json_response()
+        self.__validate_errors(json_response)
+        return json_response
+
+    def __retrieve_json_response(self):
         response = self.conn.getresponse()
         status = response.status
         if status != 200:
@@ -42,14 +58,20 @@ class HarvestHttpClient:
                 'Something bad happened. Http code: {0} returned by harvest api. '
                 'Check the doc and validate the Authorization token format, '
                 'it should start with Bearer'.format(status))
-        response = json.loads(response.read().decode('utf-8'))
-        self.__validate_errors(response)
-        return response
+        str_response = response.read().decode('utf-8')
+        json_response = json.loads(str_response)
+        return json_response
 
-    def __get_all_paginated_results(self, array_name, routes, headers):
+    def __patch(self, route, body):
+        self.headers["Content-Type"] = "application/json"
+        self.conn.request("PATCH", route, json.dumps(body), self.headers)
+        json_response = self.__retrieve_json_response()
+        self.__validate_errors(json_response)
+
+    def __get_all_paginated_results(self, array_name, routes):
         results = []
         while len(routes) > 0:
-            response = self.__get_single_result(routes.pop(), headers)
+            response = self.__get_single_result(routes.pop())
             results += response[array_name]
             next_route = response["links"]["next"]
             if next_route:
