@@ -1,13 +1,10 @@
 import unittest
+import os
 from HarvestBalanceCalculator import WorkingTimeInterval
 
-config = {
-    "beginDate": "2016-5-2",
-    "endDate": "2016-5-8",
-    "workDaysOfTheWeek": [0, 1, 2],
-    "hoursPerWorkDay": 7
-}
-working_time_interval = WorkingTimeInterval(config)
+os.environ['BEGIN_DATE'] = '2016-5-2'
+os.environ['END_DATE'] = '2016-5-8'
+working_time_interval = WorkingTimeInterval()
 
 
 class TestWorkingTimeInterval(unittest.TestCase):

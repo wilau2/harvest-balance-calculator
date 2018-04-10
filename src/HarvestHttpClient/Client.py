@@ -1,22 +1,19 @@
 import http.client
 import json
-
-from HarvestBalanceCalculator.Config.Loader import load_configuration_file
+import os
 
 
 class HarvestHttpClient:
     def __init__(self,
-                 config_loader=load_configuration_file,
                  https_connection=http.client.HTTPSConnection):
         self.HARVEST_API_URL = "api.harvestapp.com"
         self.HARVEST_ACCOUNT_ID_HEADER = "Harvest-Account-ID"
         self.HARVEST_AUTHORIZATION_HEADER = "Authorization"
         self.HARVEST_USER_AGENT = "User-Agent"
         self.conn = https_connection(self.HARVEST_API_URL)
-        secret_config = config_loader('config.json.secret')
         self.headers = {
-            self.HARVEST_ACCOUNT_ID_HEADER: secret_config["harvest"]["accountId"],
-            self.HARVEST_AUTHORIZATION_HEADER: secret_config["harvest"]["authorization"],
+            self.HARVEST_ACCOUNT_ID_HEADER: os.environ['HARVEST_ACCOUNT_ID'],
+            self.HARVEST_AUTHORIZATION_HEADER: os.environ['HARVEST_AUTHORIZATION'],
             self.HARVEST_USER_AGENT: "HarvestBalanceCalculator API Example"
         }
 

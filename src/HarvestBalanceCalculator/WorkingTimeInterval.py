@@ -1,3 +1,5 @@
+import os
+
 from datetime import timedelta
 from dateutil.parser import parse
 
@@ -5,10 +7,10 @@ from HarvestBalanceCalculator import WorkingPreference
 
 
 class WorkingTimeInterval:
-    def __init__(self, config):
-        self.working_preference = WorkingPreference(config)
-        self.begin_date = parse(config["beginDate"]).date()
-        self.end_date = parse(config["endDate"]).date()
+    def __init__(self):
+        self.working_preference = WorkingPreference()
+        self.begin_date = parse(os.environ['BEGIN_DATE']).date()
+        self.end_date = parse(os.environ['END_DATE']).date()
 
     def get_number_of_working_days(self):
         delta = (self.end_date - self.begin_date)
