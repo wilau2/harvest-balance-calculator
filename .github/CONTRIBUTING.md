@@ -17,6 +17,11 @@ Read and follow according template
 Read and follow according template
 
 
+## Run
+
+Read and follow `package.json`
+
+
 ## commitizen + cz-conventional-changelog
 
 https://github.com/commitizen/cz-cli

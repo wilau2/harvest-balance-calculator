@@ -2,13 +2,17 @@
 
 # harvest-balance-calculator
 
-With this project you can calculate how much overtime or time you owe based on the average hours you should work per weeks.
+Calculate how much overtime or time you owe based on the average hours you should work per weeks.
 
-## Harvest credentials
-[wiki](https://github.com/wilau2/harvest-balance-calculator/wiki/Setting-up-harvest-credentials)
+## Run
 
-## Usage
-`env.secret`
+```
+docker run --env-file ./env.secret williamlauze/harvest-balance-calculator:1.0.0
+```
+
+## Setup
+create `env.secret` file containing the following information
+
 ```
 HARVEST_ACCOUNT_ID=
 HARVEST_AUTHORIZATION=
@@ -17,31 +21,34 @@ END_DATE='2017-11-24'
 HOURS_PER_WORK_DAY=7.5
 WORK_DAYS_OF_THE_WEEK=0 1 2 3 4
 ```
-- workDaysOfTheWeek where 0 is monday
 
-## Run 
-### Docker
-Each time you change your configuration files, you have to build the docker image with the following command.
-- `docker build -t harvest-balance-calculator .`
-- `docker run harvest-balance-calculator`
+## Environment variables details
 
-get latest version on dockerhub.com
-- `docker run -v $(pwd)/config.json.secret:/www/config.json.secret harvest-balance-calculator`
-- `docker run --env-file ./env.secret harvest-balance-calculator`
+### HARVEST_ACCOUNT_ID
+details [here](https://github.com/wilau2/harvest-balance-calculator/blob/master/docs/harvest-credentials.md)
 
-### Python
-- Make sure python3 is installed.
-- `pip3 install pipenv`
-- `pipenv check`
-- `pipenv install`
-- `pipenv shell`
-- `pipenv run python main.py`
+### HARVEST_AUTHORIZATION
+details [here](https://github.com/wilau2/harvest-balance-calculator/blob/master/docs/harvest-credentials.md)
 
-## Tests
-### Docker
-- `docker run harvest-balance-calculator python3 -m unittest discover -v`
-### Python
-- `pipenv run python -m unittest discover -v`
+### BEGIN_DATE
+The first day you want to count "**included**"
+
+### END_DATE
+The last day you want to count "**included**"
+
+### HOURS_PER_WORK_DAY
+where 7.5 is 7 hours and 30 minutes
+
+### WORK_DAYS_OF_THE_WEEK
+0 is monday
+
+## Github
+
+click [here](https://github.com/wilau2/harvest-balance-calculator/)
+
+## Dockerhub
+
+click [here](https://hub.docker.com/r/williamlauze/harvest-balance-calculator/)
 
 ## Timezone
 Don't worry !
