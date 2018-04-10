@@ -1,4 +1,5 @@
 import unittest
+import os
 from datetime import datetime
 from unittest.mock import MagicMock, Mock
 
@@ -6,6 +7,9 @@ from HarvestHttpClient import Client
 
 
 class TestTimeUtils(unittest.TestCase):
+    os.environ['HARVEST_ACCOUNT_ID'] = 'dumpAccountId'
+    os.environ['HARVEST_AUTHORIZATION'] = 'dumbAuthorization'
+
     def test_get_user_time_entries_when_error(self):
         with self.assertRaises(RuntimeError):
             self.__given_an_error()
@@ -71,17 +75,13 @@ class TestTimeUtils(unittest.TestCase):
 
     @staticmethod
     def __given_http_client_with_secret_config_and_http_client():
-        harvest_http_client = Client.HarvestHttpClient(MagicMock(return_value={
-            "harvest": {"accountId": "dumpAccountId", "authorization": "dumbAuthorization"}
-        }), MagicMock())
+        harvest_http_client = Client.HarvestHttpClient(MagicMock())
         mock = Mock()
         mock.status = 200
         harvest_http_client.conn.getresponse.return_value = mock
         harvest_http_client.conn.request = MagicMock()
         harvest_http_client.headers = MagicMock()
         return harvest_http_client
-
-
 
 
 if __name__ == '__main__':

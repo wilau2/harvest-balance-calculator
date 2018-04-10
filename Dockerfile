@@ -1,6 +1,6 @@
 FROM williamlauze/harvest-balance-calculator-infra:latest
 
-COPY . /www
+COPY src /www
 
 WORKDIR www
 

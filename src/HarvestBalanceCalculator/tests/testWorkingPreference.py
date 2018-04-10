@@ -1,12 +1,17 @@
 import unittest
+import os
 from datetime import datetime
 from HarvestBalanceCalculator import WorkingPreference
 
-config = {
-    "workDaysOfTheWeek": [0, 1, 2],
-    "hoursPerWorkDay": 7
-}
-working_preference = WorkingPreference(config)
+# config = {
+#     "workDaysOfTheWeek": [0, 1, 2],
+#     "hoursPerWorkDay": 7
+# }
+
+os.environ['WORK_DAYS_OF_THE_WEEK'] = '0 1 2'
+os.environ['HOURS_PER_WORK_DAY'] = '7'
+
+working_preference = WorkingPreference()
 a_monday = datetime(2016, 5, 2)
 a_tuesday = datetime(2016, 5, 3)
 a_wednesday = datetime(2016, 5, 4)

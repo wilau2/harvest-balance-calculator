@@ -1,28 +1,31 @@
 {
   "name": "harvest-balance-calculator",
   "version": "1.0.0",
-  "description": "With this project you can calculate how much overtime or time you owe based on the average hours you should work per weeks.",
-  "main": "index.js",
-  "directories": {
-    "doc": "docs"
+  "config" : {
+    "dockerorganization" : "williamlauze"
   },
   "scripts": {
-    "docker:build": "docker build -t harvest-balance-calculator .",
-    "docker:run": "docker run harvest-balance-calculator",
-    "docker:teststep": "docker run harvest-balance-calculator python3 -m unittest discover -v",
-    "docker:codestyle": "docker run harvest-balance-calculator pycodestyle HarvestBalanceCalculator",
-    "docker:start": "npm run docker:build && npm run docker:run",
+    "deploy": "npm run deploy:build && npm run deploy:push",
+    "deploy:build": "docker build -t ${npm_package_config_dockerorganization}/${npm_package_name}:${npm_package_version} .",
+    "deploy:push": "docker push ${npm_package_config_dockerorganization}/${npm_package_name}:${npm_package_version}",
+    "start": "npm run start:pull && npm run start:exec",
+    "start:pull": "docker pull ${npm_package_config_dockerorganization}/${npm_package_name}:${npm_package_version}",
+    "start:exec": "docker run --env-file ./env.secret ${npm_package_config_dockerorganization}/${npm_package_name}:${npm_package_version}",
+    "docker:teststep": "docker run ${npm_package_name} python3 -m unittest discover -v",
+    "docker:codestyle": "docker run ${npm_package_name} pycodestyle HarvestBalanceCalculator",
+    "docker:build": "docker build -t ${npm_package_name} .",
+    "docker:start": "docker run --env-file ./env.secret ${npm_package_name}",
     "docker:test": "npm run docker:build && npm run docker:codestyle && npm run docker:teststep",
-    "codestyle": "pipenv run pycodestyle HarvestBalanceCalculator",
-    "test": "pipenv run python -m unittest discover -v",
-    "start": "pipenv run python main.py"
+    "python:codestyle": "pipenv run pycodestyle src",
+    "python:test": "pipenv run python -m unittest discover -v src",
+    "python:start": "pipenv run python src/main.py"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wilau2/harvest-balance-calculator.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "William Lauze",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/wilau2/harvest-balance-calculator/issues"
   },

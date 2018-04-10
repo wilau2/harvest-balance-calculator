@@ -1,8 +1,8 @@
+import setup
 from HarvestBalanceCalculator import WorkingTimeInterval, HarvestTimeEntries
-from HarvestBalanceCalculator.Config.Loader import load_configuration_file
 from HarvestHttpClient.Client import HarvestHttpClient
 
-working_time_interval = WorkingTimeInterval(load_configuration_file('config.json'))
+working_time_interval = WorkingTimeInterval()
 
 total_should_of_worked_time = working_time_interval.get_total_should_of_worked_time()
 
@@ -31,4 +31,3 @@ if diff > 0:
 else:
     print("You owe big brother")
     print(diff)
-
