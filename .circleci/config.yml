@@ -16,8 +16,38 @@ jobs:
       - run:
           name: build_and_push_infra_docker_image
           command: |
+            apk update && apk add curl curl-dev bash jq
             TAG=0.1.${CIRCLE_WORKFLOW_ID}
-            COMMIT_RANGE=$(echo "${CIRCLE_COMPARE_URL}" | cut -d/ -f7)
+            if [ -n "${CIRCLE_PULL_REQUEST}" ]
+            then
+              echo "This is a pull request"
+              PULL_REQUEST_NUMBER=$(echo "${CIRCLE_PULL_REQUEST}" | cut -d/ -f7)
+              PULL_REQUEST_DETAILS=$(curl https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/pulls/${PULL_REQUEST_NUMBER})
+              REPO_IS_PRIVATE=$(echo "${PULL_REQUEST_DETAILS}" | jq -r .url)
+              if [ -n "${REPO_IS_PRIVATE}" ]
+              then
+                echo "Private repo"
+                PULL_REQUEST_DETAILS=$(curl https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/pulls/${PULL_REQUEST_NUMBER}?access_token=${GITHUB_TOKEN_COMMITLINT})
+              else
+                echo "Public repo"
+              fi
+
+              BASE_SHA1=$(echo "${PULL_REQUEST_DETAILS}" | jq -r .base.sha)
+              HEAD_SHA1=$(echo "${PULL_REQUEST_DETAILS}" | jq -r .head.sha)
+
+              COMMIT_RANGE="${BASE_SHA1}...${HEAD_SHA1}"
+            else
+              COMMIT_RANGE=$(echo "${CIRCLE_COMPARE_URL}" | cut -d/ -f7)
+              FIRST_COMMIT=$(echo "${COMMIT_RANGE}" | cut -d. -f1)
+              echo "This is a normal commit range: ${COMMIT_RANGE} with first commit: ${FIRST_COMMIT}"
+              if git cat-file -e ${FIRST_COMMIT}; then
+                echo "${FIRST_COMMIT} exists"
+              else
+                echo "${FIRST_COMMIT} does not exist"
+                echo "rebase support is limited will compare against master"
+                COMMIT_RANGE=origin/master...${CIRCLE_SHA1}
+              fi
+            fi
             if git diff --name-only ${COMMIT_RANGE} -r | grep -q infra/Dockerfile ; then
               cd infra
               docker login -u ${DOCKERHUB_USER} -p ${DOCKERHUB_PASSWORD}
@@ -39,9 +69,7 @@ jobs:
             TAG=0.1.${CIRCLE_WORKFLOW_ID}
             docker login -u ${DOCKERHUB_USER} -p ${DOCKERHUB_PASSWORD}
             docker build -t ${DOCKERHUB_USER}/${DOCKER_APP_IMG_NAME}:${TAG} .
-            docker run ${DOCKERHUB_USER}/${DOCKER_APP_IMG_NAME}:${TAG} python3 -m unittest discover -v
-            docker run ${DOCKERHUB_USER}/${DOCKER_APP_IMG_NAME}:${TAG} codecov
-
+            docker run ${DOCKERHUB_USER}/${DOCKER_APP_IMG_NAME}:${TAG} /bin/sh -c 'cd src ; coverage run -m unittest discover -v ; codecov --token=722c846b-a449-4ecf-8998-2b355c93dd78'
 workflows:
   version: 2
   build_and_test:

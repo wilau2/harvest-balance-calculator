@@ -11,7 +11,7 @@
     "start": "npm run start:pull && npm run start:exec",
     "start:pull": "docker pull ${npm_package_config_dockerorganization}/${npm_package_name}:${npm_package_version}",
     "start:exec": "docker run --env-file ./env.secret ${npm_package_config_dockerorganization}/${npm_package_name}:${npm_package_version}",
-    "docker:teststep": "docker run ${npm_package_name} python3 -m unittest discover -v",
+    "docker:teststep": "docker run ${npm_package_name} /bin/sh -c 'cd src ; coverage run -m unittest discover -v ; codecov --token=722c846b-a449-4ecf-8998-2b355c93dd78'",
     "docker:codestyle": "docker run ${npm_package_name} pycodestyle HarvestBalanceCalculator",
     "docker:build": "docker build -t ${npm_package_name} .",
     "docker:start": "docker run --env-file ./env.secret ${npm_package_name}",
