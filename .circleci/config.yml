@@ -40,6 +40,7 @@ jobs:
             docker login -u ${DOCKERHUB_USER} -p ${DOCKERHUB_PASSWORD}
             docker build -t ${DOCKERHUB_USER}/${DOCKER_APP_IMG_NAME}:${TAG} .
             docker run ${DOCKERHUB_USER}/${DOCKER_APP_IMG_NAME}:${TAG} python3 -m unittest discover -v
+            docker run ${DOCKERHUB_USER}/${DOCKER_APP_IMG_NAME}:${TAG} codecov
 
 workflows:
   version: 2
