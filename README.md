@@ -1,5 +1,5 @@
 [![CircleCI](https://circleci.com/gh/wilau2/harvest-balance-calculator.svg?style=svg)](https://circleci.com/gh/wilau2/harvest-balance-calculator)
-
+[![codecov](https://codecov.io/gh/wilau2/harvest-balance-calculator/branch/master/graph/badge.svg)](https://codecov.io/gh/wilau2/harvest-balance-calculator)
 # harvest-balance-calculator
 
 Calculate how much overtime or time you owe based on the average hours you should work per weeks.
