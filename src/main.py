@@ -4,10 +4,10 @@ from HarvestHttpClient.Client import HarvestHttpClient
 
 working_time_interval = WorkingTimeInterval()
 
-total_should_of_worked_time = working_time_interval.get_total_should_of_worked_time()
+total_should_have_worked_time = working_time_interval.get_total_should_have_worked_time()
 
-print("total_should_of_worked_time")
-print(total_should_of_worked_time)
+print("total_should_have_worked_time")
+print(total_should_have_worked_time)
 
 harvest_http_client = HarvestHttpClient()
 user_id = harvest_http_client.get_me()["id"]
@@ -24,7 +24,7 @@ total_worked_time = harvest_time_entries.get_total_worked_time()
 print("total_worked_time")
 print(total_worked_time)
 
-diff = total_worked_time - total_should_of_worked_time
+diff = total_worked_time - total_should_have_worked_time
 if diff > 0:
     print("You have some over time")
     print(diff)

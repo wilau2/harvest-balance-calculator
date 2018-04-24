@@ -12,9 +12,9 @@ class TestWorkingTimeInterval(unittest.TestCase):
         number_of_working_days = working_time_interval.get_number_of_working_days()
         self.assertEqual(3, number_of_working_days)
 
-    def test_get_total_should_of_worked_time(self):
-        total_should_of_worked_time = working_time_interval.get_total_should_of_worked_time()
-        self.assertEqual(21, total_should_of_worked_time)
+    def test_get_total_should_have_worked_time(self):
+        total_should_have_worked_time = working_time_interval.get_total_should_have_worked_time()
+        self.assertEqual(21, total_should_have_worked_time)
 
 
 if __name__ == '__main__':
