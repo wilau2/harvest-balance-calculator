@@ -1,24 +1,30 @@
 {
   "name": "harvest-balance-calculator",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "config" : {
-    "dockerorganization" : "williamlauze"
+    "dockerorganization" : "williamlauze",
+    "dockercommon": "common",
+    "dockerpipeline": "pipeline",
+    "dockerprod": "prod",
+    "dockerimagesbasepath": "dockerimages"
   },
   "scripts": {
-    "deploy": "npm run deploy:build && npm run deploy:push",
+    "deploy": "npm run deploy:build && npm run deploy:push && npm run deploy:tag:latest && npm run deploy:push:latest",
     "deploy:build": "docker build -t ${npm_package_config_dockerorganization}/${npm_package_name}:${npm_package_version} .",
     "deploy:push": "docker push ${npm_package_config_dockerorganization}/${npm_package_name}:${npm_package_version}",
+    "deploy:tag:latest": "docker tag ${npm_package_config_dockerorganization}/${npm_package_name}:${npm_package_version} ${npm_package_config_dockerorganization}/${npm_package_name}:latest",
+    "deploy:push:latest": "docker push ${npm_package_config_dockerorganization}/${npm_package_name}:latest",
     "start": "npm run start:pull && npm run start:exec",
     "start:pull": "docker pull ${npm_package_config_dockerorganization}/${npm_package_name}:${npm_package_version}",
     "start:exec": "docker run --env-file ./env.secret ${npm_package_config_dockerorganization}/${npm_package_name}:${npm_package_version}",
-    "docker:teststep": "docker run ${npm_package_name} python3 -m unittest discover -v",
-    "docker:codestyle": "docker run ${npm_package_name} pycodestyle HarvestBalanceCalculator",
-    "docker:build": "docker build -t ${npm_package_name} .",
-    "docker:start": "docker run --env-file ./env.secret ${npm_package_name}",
-    "docker:test": "npm run docker:build && npm run docker:codestyle && npm run docker:teststep",
-    "python:codestyle": "pipenv run pycodestyle src",
-    "python:test": "pipenv run python -m unittest discover -v src",
-    "python:start": "pipenv run python src/main.py"
+    "docker:teststep:ci": "npm run docker:build:pipeline && docker run ${npm_package_config_dockerorganization}/${npm_package_name}-pipeline /bin/sh -c 'cd src ; coverage run -m unittest discover -v ; codecov --token=722c846b-a449-4ecf-8998-2b355c93dd78'",
+    "docker:codestyle": "npm run docker:build:pipeline && docker run ${npm_package_config_dockerorganization}/${npm_package_name}-pipeline pycodestyle --exclude=Pipfile.lock,env.secret src/*",
+    "docker:add:src": "cp -r src dockerimages/${FOLDER}/src",
+    "docker:clean:src":"rm -r dockerimages/${FOLDER}/src",
+    "docker:build":"docker build -t ${npm_package_config_dockerorganization}/${npm_package_name}-${FOLDER}:latest ${npm_package_config_dockerimagesbasepath}/${FOLDER}",
+    "docker:build:common": "export FOLDER=common && npm run docker:build",
+    "docker:build:pipeline": "npm run docker:build:common && export FOLDER=pipeline && npm run docker:add:src && cp -r .git dockerimages/${FOLDER}/.git && npm run docker:build && npm run docker:clean:src && rm -rf dockerimages/${FOLDER}/.git",
+    "docker:build:prod": "export FOLDER=prod && npm run docker:add:src && docker build -t ${npm_package_name}:latest dockerimages/${FOLDER} && npm run docker:clean:src"
   },
   "repository": {
     "type": "git",

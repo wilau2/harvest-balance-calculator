@@ -1,7 +1,7 @@
 FROM williamlauze/harvest-balance-calculator-infra:latest
 
-COPY src /www
+COPY ./ /www
 
 WORKDIR www
 
-CMD python3 main.py
+CMD python3 src/main.py

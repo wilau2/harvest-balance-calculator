@@ -21,5 +21,5 @@ class WorkingTimeInterval:
                 number_of_working_days += 1
         return number_of_working_days
 
-    def get_total_should_of_worked_time(self):
+    def get_total_should_have_worked_time(self):
         return self.get_number_of_working_days() * self.working_preference.hours_per_day
