@@ -1,8 +1,10 @@
 [![CircleCI](https://circleci.com/gh/wilau2/harvest-balance-calculator.svg?style=svg)](https://circleci.com/gh/wilau2/harvest-balance-calculator)
 [![codecov](https://codecov.io/gh/wilau2/harvest-balance-calculator/branch/master/graph/badge.svg)](https://codecov.io/gh/wilau2/harvest-balance-calculator)
 [![tidelift](https://tidelift.com/badges/github/wilau2/harvest-balanve-calculator?style=flat)](https://tidelift.com/repo/github/wilau2/harvest-balance-calculator)
-# harvest-balance-calculator
+[![](https://images.microbadger.com/badges/image/williamlauze/harvest-balance-calculator.svg)](https://microbadger.com/images/williamlauze/harvest-balance-calculator "Get your own image badge on microbadger.com")
+[![](https://images.microbadger.com/badges/version/williamlauze/harvest-balance-calculator.svg)](https://microbadger.com/images/williamlauze/harvest-balance-calculator "Get your own version badge on microbadger.com")
 
+# harvest-balance-calculator
 Calculate how much overtime or time you owe based on the average hours you should work per weeks.
 
 ## Run
