@@ -17,13 +17,13 @@
     "start": "npm run start:pull && npm run start:exec",
     "start:pull": "docker pull ${npm_package_config_dockerorganization}/${npm_package_name}:${npm_package_version}",
     "start:exec": "docker run --env-file ./env.secret ${npm_package_config_dockerorganization}/${npm_package_name}:${npm_package_version}",
-    "docker:teststep:ci": "docker run ${npm_package_config_dockerorganization}/${npm_package_name}-pipeline /bin/sh -c 'cd src ; coverage run -m unittest discover -v ; codecov --token=722c846b-a449-4ecf-8998-2b355c93dd78'",
-    "docker:codestyle": "docker run ${npm_package_config_dockerorganization}/${npm_package_name}-pipeline pycodestyle src/*",
+    "docker:teststep:ci": "npm run docker:build:pipeline && docker run ${npm_package_config_dockerorganization}/${npm_package_name}-pipeline /bin/sh -c 'cd src ; coverage run -m unittest discover -v ; codecov --token=722c846b-a449-4ecf-8998-2b355c93dd78'",
+    "docker:codestyle": "npm run docker:build:pipeline && docker run ${npm_package_config_dockerorganization}/${npm_package_name}-pipeline pycodestyle --exclude=Pipfile.lock,env.secret src/*",
     "docker:add:src": "cp -r src dockerimages/${FOLDER}/src",
     "docker:clean:src":"rm -r dockerimages/${FOLDER}/src",
     "docker:build":"docker build -t ${npm_package_config_dockerorganization}/${npm_package_name}-${FOLDER}:latest ${npm_package_config_dockerimagesbasepath}/${FOLDER}",
     "docker:build:common": "export FOLDER=common && npm run docker:build",
-    "docker:build:pipeline": "export FOLDER=pipeline && npm run docker:add:src && cp -r .git dockerimages/${FOLDER}/.git && npm run docker:build && npm run docker:clean:src && rm -rf dockerimages/${FOLDER}/.git",
+    "docker:build:pipeline": "npm run docker:build:common && export FOLDER=pipeline && npm run docker:add:src && cp -r .git dockerimages/${FOLDER}/.git && npm run docker:build && npm run docker:clean:src && rm -rf dockerimages/${FOLDER}/.git",
     "docker:build:prod": "export FOLDER=prod && npm run docker:add:src && docker build -t ${npm_package_name}:latest dockerimages/${FOLDER} && npm run docker:clean:src"
   },
   "repository": {
