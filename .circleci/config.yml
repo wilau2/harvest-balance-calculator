@@ -82,8 +82,13 @@ workflows:
       - docker-deploy-image:
           requires:
             - tests
+            - commitlint
+            - gitbook-deploy
           filters:
             branches:
               only: master
       - commitlint
-      - gitbook-deploy
+      - gitbook-deploy:
+#          filters:
+#            branches:
+#              only: master
