@@ -1,5 +1,5 @@
-[![CircleCI](https://circleci.com/gh/wilau2/harvest-balance-calculator.svg?style=svg)](https://circleci.com/gh/wilau2/harvest-balance-calculator)
-[![codecov](https://codecov.io/gh/wilau2/harvest-balance-calculator/branch/master/graph/badge.svg)](https://codecov.io/gh/wilau2/harvest-balance-calculator)
+[![CircleCI](https://img.shields.io/circleci/project/github/wilau2/harvest-balance-calculator/master.svg)](https://circleci.com/gh/wilau2/harvest-balance-calculator)
+[![codecov](https://img.shields.io/codecov/c/github/wilau2/harvest-balance-calculator/master.svg)](https://codecov.io/gh/wilau2/harvest-balance-calculator)
 [![tidelift](https://tidelift.com/badges/github/wilau2/harvest-balanve-calculator?style=flat)](https://tidelift.com/repo/github/wilau2/harvest-balance-calculator)
 [![](https://images.microbadger.com/badges/image/williamlauze/harvest-balance-calculator.svg)](https://microbadger.com/images/williamlauze/harvest-balance-calculator "Get your own image badge on microbadger.com")
 [![](https://images.microbadger.com/badges/version/williamlauze/harvest-balance-calculator.svg)](https://microbadger.com/images/williamlauze/harvest-balance-calculator "Get your own version badge on microbadger.com")
@@ -10,7 +10,7 @@ Calculate how much overtime or time you owe based on the average hours you shoul
 ## Run
 
 ```
-docker run --env-file ./env.secret williamlauze/harvest-balance-calculator:1.0.0
+docker run --env-file ./env.secret williamlauze/harvest-balance-calculator:latest
 ```
 
 ## Setup
