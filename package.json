@@ -10,7 +10,7 @@
   },
   "scripts": {
     "deploy": "npm run deploy:build && npm run deploy:push && npm run deploy:tag:latest && npm run deploy:push:latest",
-    "deploy:build": "docker build -t ${npm_package_config_dockerorganization}/${npm_package_name}:${npm_package_version} .",
+    "deploy:build": "export FOLDER=prod & docker build -t ${npm_package_config_dockerorganization}/${npm_package_name}:${npm_package_version} ${npm_package_config_dockerimagesbasepath}/${FOLDER}",
     "deploy:push": "docker push ${npm_package_config_dockerorganization}/${npm_package_name}:${npm_package_version}",
     "deploy:tag:latest": "docker tag ${npm_package_config_dockerorganization}/${npm_package_name}:${npm_package_version} ${npm_package_config_dockerorganization}/${npm_package_name}:latest",
     "deploy:push:latest": "docker push ${npm_package_config_dockerorganization}/${npm_package_name}:latest",
