@@ -6,11 +6,12 @@
     "dockercommon": "common",
     "dockerpipeline": "pipeline",
     "dockerprod": "prod",
-    "dockerimagesbasepath": "dockerimages"
+    "dockerpath": "dockerimages"
   },
   "scripts": {
-    "deploy": "npm run deploy:build && npm run deploy:push && npm run deploy:tag:latest && npm run deploy:push:latest",
-    "deploy:build": "export FOLDER=prod & docker build -t ${npm_package_config_dockerorganization}/${npm_package_name}:${npm_package_version} ${npm_package_config_dockerimagesbasepath}/${FOLDER}",
+    "deploy": "export FOLDER=prod & npm run deploy:build && npm run deploy:push && npm run deploy:tag:latest && npm run deploy:push:latest",
+    "deploy:build": "npm run docker:add:src && npm run deploy:build:version && npm run docker:clean:src",
+    "deploy:build:version": "docker build -t ${npm_package_config_dockerorganization}/${npm_package_name}:${npm_package_version} ${npm_package_config_dockerpath}/${FOLDER}",
     "deploy:push": "docker push ${npm_package_config_dockerorganization}/${npm_package_name}:${npm_package_version}",
     "deploy:tag:latest": "docker tag ${npm_package_config_dockerorganization}/${npm_package_name}:${npm_package_version} ${npm_package_config_dockerorganization}/${npm_package_name}:latest",
     "deploy:push:latest": "docker push ${npm_package_config_dockerorganization}/${npm_package_name}:latest",
@@ -19,12 +20,11 @@
     "start:exec": "docker run --env-file ./env.secret ${npm_package_config_dockerorganization}/${npm_package_name}:${npm_package_version}",
     "docker:teststep:ci": "npm run docker:build:pipeline && docker run ${npm_package_config_dockerorganization}/${npm_package_name}-pipeline /bin/sh -c 'cd src ; coverage run -m unittest discover -v ; codecov --token=722c846b-a449-4ecf-8998-2b355c93dd78'",
     "docker:codestyle": "npm run docker:build:pipeline && docker run ${npm_package_config_dockerorganization}/${npm_package_name}-pipeline pycodestyle --exclude=Pipfile.lock,env.secret src/*",
-    "docker:add:src": "cp -r src dockerimages/${FOLDER}/src",
-    "docker:clean:src":"rm -r dockerimages/${FOLDER}/src",
-    "docker:build":"docker build -t ${npm_package_config_dockerorganization}/${npm_package_name}-${FOLDER}:latest ${npm_package_config_dockerimagesbasepath}/${FOLDER}",
-    "docker:build:common": "export FOLDER=common && npm run docker:build",
-    "docker:build:pipeline": "npm run docker:build:common && export FOLDER=pipeline && npm run docker:add:src && cp -r .git dockerimages/${FOLDER}/.git && npm run docker:build && npm run docker:clean:src && rm -rf dockerimages/${FOLDER}/.git",
-    "docker:build:prod": "export FOLDER=prod && npm run docker:add:src && docker build -t ${npm_package_name}:latest dockerimages/${FOLDER} && npm run docker:clean:src"
+    "docker:add:src": "cp -r src ${npm_package_config_dockerpath}/${FOLDER}/src",
+    "docker:clean:src":"rm -r ${npm_package_config_dockerpath}/${FOLDER}/src",
+    "docker:build:latest":"docker build -t ${npm_package_config_dockerorganization}/${npm_package_name}-${FOLDER}:latest ${npm_package_config_dockerpath}/${FOLDER}",
+    "docker:build:common": "export FOLDER=common && npm run docker:build:latest",
+    "docker:build:pipeline": "npm run docker:build:common && export FOLDER=pipeline && npm run docker:add:src && cp -r .git ${npm_package_config_dockerpath}/${FOLDER}/.git && npm run docker:build:latest && npm run docker:clean:src && rm -rf dockerimages/${FOLDER}/.git"
   },
   "repository": {
     "type": "git",
