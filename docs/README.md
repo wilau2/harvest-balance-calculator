@@ -1,11 +1,18 @@
-[![CircleCI](https://img.shields.io/circleci/project/github/wilau2/harvest-balance-calculator/master.svg)](https://circleci.com/gh/wilau2/harvest-balance-calculator)
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
-[![codecov](https://img.shields.io/codecov/c/github/wilau2/harvest-balance-calculator/master.svg)](https://codecov.io/gh/wilau2/harvest-balance-calculator)
-[![tidelift](https://tidelift.com/badges/github/wilau2/harvest-balance-calculator)](https://tidelift.com/repo/github/wilau2/harvest-balance-calculator)
-[![](https://images.microbadger.com/badges/image/williamlauze/harvest-balance-calculator.svg)](https://microbadger.com/images/williamlauze/harvest-balance-calculator "Get your own image badge on microbadger.com")
-[![](https://images.microbadger.com/badges/version/williamlauze/harvest-balance-calculator.svg)](https://microbadger.com/images/williamlauze/harvest-balance-calculator "Get your own version badge on microbadger.com")
+# Harvest balance calculator
+[![circleci][circleci-badge]][circleci]
+[![codecov][codecov-badge]][codecov]
+[![tidelift][tidelift-badge]][tidelift]
 
-# harvest-balance-calculator
+[![docker image][microbadger-image-badge]][microbadger]
+[![docker version][microbadger-version-badge]][microbadger]
+[![Docker Pulls][docker-pulls-badge]][docker]
+
+[![donate][donate-badge]][donate]
+[![license][license-badge]][license]
+[![all contributors][all-contributors-badge]][all-contributors]
+
+[![GitHub Stars][github-stars-badge]][github]
+
 Calculate how much overtime or time you owe based on the average hours you should work per weeks.
 
 ## Setup
@@ -43,3 +50,27 @@ Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!
+
+## License
+
+MIT
+
+[circleci-badge]: https://img.shields.io/circleci/project/github/wilau2/harvest-balance-calculator/master.svg
+[circleci]: https://circleci.com/gh/wilau2/harvest-balance-calculator
+[all-contributors-badge]: https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square
+[all-contributors]: #contributors
+[codecov-badge]: https://img.shields.io/codecov/c/github/wilau2/harvest-balance-calculator/master.svg
+[codecov]: https://codecov.io/gh/wilau2/harvest-balance-calculator
+[tidelift-badge]: https://tidelift.com/badges/github/wilau2/harvest-balance-calculator
+[tidelift]: https://tidelift.com/repo/github/wilau2/harvest-balance-calculator
+[donate-badge]: https://img.shields.io/badge/$-support-green.svg?style=flat-square
+[donate]: https://www.paypal.me/williamlauze/10
+[license-badge]: https://img.shields.io/github/license/mashape/apistatus.svg
+[license]: https://github.com/wilau2/harvest-balance-calculator/blob/master/LICENSE
+[microbadger-image-badge]: https://images.microbadger.com/badges/image/williamlauze/harvest-balance-calculator.svg
+[microbadger-version-badge]: https://images.microbadger.com/badges/version/williamlauze/harvest-balance-calculator.svg
+[microbadger]: https://microbadger.com/images/williamlauze/harvest-balance-calculator
+[docker-pulls-badge]: https://img.shields.io/docker/pulls/williamlauze/harvest-balance-calculator.svg
+[docker]: https://hub.docker.com/r/williamlauze/harvest-balance-calculator
+[github-stars-badge]: https://img.shields.io/github/stars/wilau2/harvest-balance-calculator.svg?style=social&label=Stars
+[github]: https://github.com/wilau2/harvest-balance-calculator
