@@ -7,14 +7,8 @@
 # harvest-balance-calculator
 Calculate how much overtime or time you owe based on the average hours you should work per weeks.
 
-## Run
-
-```
-docker run --env-file ./env.secret williamlauze/harvest-balance-calculator:latest
-```
-
 ## Setup
-create `env.secret` file containing the following information
+* create `env.secret` file containing the following information
 
 ```
 HARVEST_ACCOUNT_ID=
@@ -24,21 +18,15 @@ END_DATE='2017-11-24'
 HOURS_PER_WORK_DAY=7.5
 WORK_DAYS_OF_THE_WEEK=0 1 2 3 4
 ```
+* get your [harvest credentials](harvest.md)
 
-
-
-## Github
-
-click [here](https://github.com/wilau2/harvest-balance-calculator/)
-
-## Dockerhub
-
-click [here](https://hub.docker.com/r/williamlauze/harvest-balance-calculator/)
-
-## Timezone
-Don't worry !
-Harvest will return every time already converted with your timezone
-you can make sure your user has the good timezone ->  `GET https://api.harvestapp.com/v2/users/me`
-
-## Beer
-If you like this project and want to help. You can buy me a beer [here](https://www.paypal.me/williamlauze)
+## Run
+* docker
+```
+docker pull williamlauze/harvest-balance-calculator:latest
+docker run --env-file ./env.secret williamlauze/harvest-balance-calculator:latest
+```
+* npm
+```
+npm run start
+```
