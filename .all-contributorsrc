@@ -1,0 +1,34 @@
+{
+  "projectName": "harvest-balance-calculator",
+  "projectOwner": "wilau2",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "docs/README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "wilau2",
+      "name": "William Lauzé",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/5473183?v=4",
+      "profile": "https://github.com/wilau2",
+      "contributions": [
+        "code",
+        "doc",
+        "infra",
+        "test"
+      ]
+    },
+    {
+      "login": "Carkib",
+      "name": "Boris Fortin Côté",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/10335220?v=4",
+      "profile": "https://github.com/Carkib",
+      "contributions": [
+        "code"
+      ]
+    }
+  ]
+}

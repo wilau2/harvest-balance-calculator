@@ -1,4 +1,5 @@
 [![CircleCI](https://img.shields.io/circleci/project/github/wilau2/harvest-balance-calculator/master.svg)](https://circleci.com/gh/wilau2/harvest-balance-calculator)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
 [![codecov](https://img.shields.io/codecov/c/github/wilau2/harvest-balance-calculator/master.svg)](https://codecov.io/gh/wilau2/harvest-balance-calculator)
 [![tidelift](https://tidelift.com/badges/github/wilau2/harvest-balance-calculator)](https://tidelift.com/repo/github/wilau2/harvest-balance-calculator)
 [![](https://images.microbadger.com/badges/image/williamlauze/harvest-balance-calculator.svg)](https://microbadger.com/images/williamlauze/harvest-balance-calculator "Get your own image badge on microbadger.com")
@@ -30,3 +31,15 @@ docker run --env-file ./env.secret williamlauze/harvest-balance-calculator:lates
 ```
 npm run start
 ```
+
+## Contributors
+
+Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
+| [<img src="https://avatars0.githubusercontent.com/u/5473183?v=4" width="100px;"/><br /><sub><b>William Lauzé</b></sub>](https://github.com/wilau2)<br />[💻](https://github.com/wilau2/harvest-balance-calculator/commits?author=wilau2 "Code") [📖](https://github.com/wilau2/harvest-balance-calculator/commits?author=wilau2 "Documentation") [🚇](#infra-wilau2 "Infrastructure (Hosting, Build-Tools, etc)") [⚠️](https://github.com/wilau2/harvest-balance-calculator/commits?author=wilau2 "Tests") | [<img src="https://avatars3.githubusercontent.com/u/10335220?v=4" width="100px;"/><br /><sub><b>Boris Fortin Côté</b></sub>](https://github.com/Carkib)<br />[💻](https://github.com/wilau2/harvest-balance-calculator/commits?author=Carkib "Code") |
+| :---: | :---: |
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!
