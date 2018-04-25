@@ -9,8 +9,8 @@
     "dockerpath": "dockerimages"
   },
   "scripts": {
-    "deploy": "export FOLDER=prod & npm run deploy:build && npm run deploy:push && npm run deploy:tag:latest && npm run deploy:push:latest",
-    "deploy:build": "npm run docker:add:src && npm run deploy:build:version && npm run docker:clean:src",
+    "deploy": "export FOLDER=prod && npm run deploy:build:prod && npm run deploy:push && npm run deploy:tag:latest && npm run deploy:push:latest",
+    "deploy:build:prod": "npm run docker:add:src && npm run deploy:build:version && npm run docker:clean:src",
     "deploy:build:version": "docker build -t ${npm_package_config_dockerorganization}/${npm_package_name}:${npm_package_version} ${npm_package_config_dockerpath}/${FOLDER}",
     "deploy:push": "docker push ${npm_package_config_dockerorganization}/${npm_package_name}:${npm_package_version}",
     "deploy:tag:latest": "docker tag ${npm_package_config_dockerorganization}/${npm_package_name}:${npm_package_version} ${npm_package_config_dockerorganization}/${npm_package_name}:latest",
@@ -22,9 +22,11 @@
     "docker:codestyle": "npm run docker:build:pipeline && docker run ${npm_package_config_dockerorganization}/${npm_package_name}-pipeline pycodestyle --exclude=Pipfile.lock,env.secret src/*",
     "docker:add:src": "cp -r src ${npm_package_config_dockerpath}/${FOLDER}/src",
     "docker:clean:src":"rm -r ${npm_package_config_dockerpath}/${FOLDER}/src",
+    "docker:add:git": "cp -r .git ${npm_package_config_dockerpath}/${FOLDER}/.git",
+    "docker:clean:git":"rm -rf dockerimages/${FOLDER}/.git",
     "docker:build:latest":"docker build -t ${npm_package_config_dockerorganization}/${npm_package_name}-${FOLDER}:latest ${npm_package_config_dockerpath}/${FOLDER}",
     "docker:build:common": "export FOLDER=common && npm run docker:build:latest",
-    "docker:build:pipeline": "npm run docker:build:common && export FOLDER=pipeline && npm run docker:add:src && cp -r .git ${npm_package_config_dockerpath}/${FOLDER}/.git && npm run docker:build:latest && npm run docker:clean:src && rm -rf dockerimages/${FOLDER}/.git"
+    "docker:build:pipeline": "npm run docker:build:common && export FOLDER=pipeline && npm run docker:add:src && npm run docker:add:git && npm run docker:build:latest && npm run docker:clean:src && npm run docker:clean:git"
   },
   "repository": {
     "type": "git",
