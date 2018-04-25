@@ -1,8 +1,8 @@
 {
   "name": "harvest-balance-calculator",
   "version": "1.0.4",
-  "config" : {
-    "dockerorganization" : "williamlauze",
+  "config": {
+    "dockerorganization": "williamlauze",
     "dockercommon": "common",
     "dockerpipeline": "pipeline",
     "dockerprod": "prod",
@@ -21,12 +21,14 @@
     "docker:teststep:ci": "npm run docker:build:pipeline && docker run ${npm_package_config_dockerorganization}/${npm_package_name}-pipeline /bin/sh -c 'cd src ; coverage run -m unittest discover -v ; codecov --token=722c846b-a449-4ecf-8998-2b355c93dd78'",
     "docker:codestyle": "npm run docker:build:pipeline && docker run ${npm_package_config_dockerorganization}/${npm_package_name}-pipeline pycodestyle --exclude=Pipfile.lock,env.secret src/*",
     "docker:add:src": "cp -r src ${npm_package_config_dockerpath}/${FOLDER}/src",
-    "docker:clean:src":"rm -r ${npm_package_config_dockerpath}/${FOLDER}/src",
+    "docker:clean:src": "rm -r ${npm_package_config_dockerpath}/${FOLDER}/src",
     "docker:add:git": "cp -r .git ${npm_package_config_dockerpath}/${FOLDER}/.git",
-    "docker:clean:git":"rm -rf dockerimages/${FOLDER}/.git",
-    "docker:build:latest":"docker build -t ${npm_package_config_dockerorganization}/${npm_package_name}-${FOLDER}:latest ${npm_package_config_dockerpath}/${FOLDER}",
+    "docker:clean:git": "rm -rf dockerimages/${FOLDER}/.git",
+    "docker:build:latest": "docker build -t ${npm_package_config_dockerorganization}/${npm_package_name}-${FOLDER}:latest ${npm_package_config_dockerpath}/${FOLDER}",
     "docker:build:common": "export FOLDER=common && npm run docker:build:latest",
-    "docker:build:pipeline": "npm run docker:build:common && export FOLDER=pipeline && npm run docker:add:src && npm run docker:add:git && npm run docker:build:latest && npm run docker:clean:src && npm run docker:clean:git"
+    "docker:build:pipeline": "npm run docker:build:common && export FOLDER=pipeline && npm run docker:add:src && npm run docker:add:git && npm run docker:build:latest && npm run docker:clean:src && npm run docker:clean:git",
+    "contributors:add": "all-contributors add",
+    "contributors:generate": "all-contributors generate"
   },
   "repository": {
     "type": "git",
@@ -37,5 +39,8 @@
   "bugs": {
     "url": "https://github.com/wilau2/harvest-balance-calculator/issues"
   },
-  "homepage": "https://github.com/wilau2/harvest-balance-calculator#readme"
+  "homepage": "https://github.com/wilau2/harvest-balance-calculator#readme",
+  "devDependencies": {
+    "all-contributors-cli": "4.11.1"
+  }
 }
