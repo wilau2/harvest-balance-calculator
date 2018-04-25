@@ -1,12 +1,21 @@
 version: 2
 references:
-  container_config: &docker-container-config
-    docker:
-      - image: williamlauze/docker-alpine-utils:latest
+  container_config:
+    docker: &ref_0
+      - image: 'williamlauze/docker-alpine-utils:latest'
     working_directory: ~/docker
+  commitlint-container:
+    docker: &ref_1
+      - image: 'williamlauze/circleci-commitlint:latest'
+    working-directory: ~/repo
+  gitbook-deploy-container:
+    docker: &ref_2
+      - image: 'williamlauze/gitbookdeploy:latest'
+    working-directory: ~/repo
 jobs:
   tests:
-    <<: *docker-container-config
+    docker: *ref_0
+    working_directory: ~/docker
     steps:
       - checkout
       - setup_remote_docker:
@@ -20,7 +29,8 @@ jobs:
             npm run docker:teststep:ci
             npm run docker:codestyle
   docker-deploy-image:
-    <<: *docker-container-config
+    docker: *ref_0
+    working_directory: ~/docker
     steps:
       - checkout
       - setup_remote_docker:
@@ -28,9 +38,11 @@ jobs:
           docker_layer_caching: true
       - run:
           name: docker-deploy-image
-          command: |
+          command: >
             VERSION=$(cat package.json | jq -r .version)
-            if sh /scripts/list-public-docker-tags.sh williamlauze/harvest-balance-calculator | grep ${VERSION}; then
+
+            if sh /scripts/list-public-docker-tags.sh
+            williamlauze/harvest-balance-calculator | grep ${VERSION}; then
               echo "Version number already used"
               echo "Did you forget to increase package.json version number?"
             else
@@ -38,6 +50,30 @@ jobs:
               npm run docker:build:common
               npm run deploy
             fi
+  commitlint:
+    docker: *ref_1
+    working-directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: commitlint
+          command: |
+            /bin/sh /.scripts/commitlint_range.sh
+  gitbook-deploy:
+    docker: *ref_2
+    working-directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: gitbook deploy on firebase
+          command: >
+            sh /scripts/gitbook-build.sh ${GITBOOK_PATH}
+
+            sh /scripts/gitbook-firebase-init.sh ${GITBOOK_PATH}/_book
+            ${GITBOOK_FIREBASE_APP}
+
+            sh /scripts/firebase-deploy-only-hosting.sh gitbook
+            ${GITBOOK_FIREBASE_TOKEN}
 workflows:
   version: 2
   test-and-deploy-docker-image:
@@ -46,6 +82,13 @@ workflows:
       - docker-deploy-image:
           requires:
             - tests
+            - commitlint
+            - gitbook-deploy
+          filters:
+            branches:
+              only: master
+      - commitlint
+      - gitbook-deploy:
           filters:
             branches:
               only: master
