@@ -45,6 +45,7 @@ jobs:
             williamlauze/harvest-balance-calculator | grep ${VERSION}; then
               echo "Version number already used"
               echo "Did you forget to increase package.json version number?"
+              exit 1
             else
               docker login -u ${DOCKERHUB_USER} -p ${DOCKERHUB_PASSWORD}
               npm run docker:build:common
