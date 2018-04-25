@@ -1,10 +1,10 @@
 # Environment variables details
 
 ## HARVEST_ACCOUNT_ID
-details [here](https://github.com/wilau2/harvest-balance-calculator/blob/master/docs/harvest-credentials.md)
+* [harvest credentials](harvest.md)
 
 ## HARVEST_AUTHORIZATION
-details [here](https://github.com/wilau2/harvest-balance-calculator/blob/master/docs/harvest-credentials.md)
+* [harvest credentials](harvest.md)
 
 ## BEGIN_DATE
 The first day you want to count "**included**"
