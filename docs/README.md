@@ -1,4 +1,6 @@
 # Harvest balance calculator
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/wilau2/harvest-balance-calculator.svg)](https://greenkeeper.io/)
 [![circleci][circleci-badge]][circleci]
 [![codecov][codecov-badge]][codecov]
 [![tidelift][tidelift-badge]][tidelift]
