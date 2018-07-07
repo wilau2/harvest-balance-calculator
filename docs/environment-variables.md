@@ -17,3 +17,6 @@ where 7.5 is 7 hours and 30 minutes
 
 ## WORK_DAYS_OF_THE_WEEK
 0 is monday
+
+## WORKED_HOURS_CORRECTION (optional)
+Number of hours to add to your total worked time from harvest. Can be negative.
