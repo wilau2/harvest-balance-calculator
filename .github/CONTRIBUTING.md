@@ -42,6 +42,14 @@ pipenv run python main.py
 pipenv run coverage run -m unittest discover -v
 pipenv run coverage report
 
-## commitizen + cz-conventional-changelog
+## Add yourself as a contributor
 
-https://github.com/commitizen/cz-cli
+This project follows the [all contributors][all-contributors] specification. To add yourself to the table of
+contributors on the README.md, please use the automated script as part of your PR:
+
+```console
+npm run contributors:add -- <YOUR_GITHUB_USERNAME>
+```
+
+Follow the prompt. If you've already added yourself to the list and are making a new type of contribution, you can run
+it again and select the added contribution type.

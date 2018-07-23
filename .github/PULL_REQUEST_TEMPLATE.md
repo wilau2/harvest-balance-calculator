@@ -20,3 +20,4 @@ Please identify one developers to review this change
 - [ ] New and existing unit tests pass locally with my changes
 - [ ] Any dependent changes have been merged and published in downstream modules
 - [ ] I have updated the application/dependencies Dockerfile
+- [ ] I have added myself in the all-contributors section [../.github./CONTRIBUTING.md](CONTRIBUTING.md)
