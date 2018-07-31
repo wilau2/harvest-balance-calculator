@@ -29,6 +29,17 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "karine-larouche",
+      "name": "Karine Larouche",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/28273478?v=4",
+      "profile": "https://github.com/karine-larouche",
+      "contributions": [
+        "code",
+        "doc",
+        "test"
+      ]
     }
   ]
 }
