@@ -19,4 +19,6 @@ where 7.5 is 7 hours and 30 minutes
 0 is monday
 
 ## WORKED_HOURS_CORRECTION (optional)
-Number of hours to add to your total worked time from harvest. Can be negative.
+Number of hours to add to your total worked time from harvest. Can be negative.  
+Ex: 35 hours of overtime where paid by your boss: WORKED_HOURS_CORRECTION=-35  
+Ex: You took a 35h week of unpaid vacation that is not written in harvest: WORKED_HOURS_CORRECTION=35
