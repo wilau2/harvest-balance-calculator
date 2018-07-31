@@ -6,7 +6,7 @@ os.environ['BEGIN_DATE'] = '2016-5-2'
 os.environ['END_DATE'] = '2016-5-8'
 working_time_interval = WorkingTimeInterval()
 
-os.environ['WORKED_HOURS_CORRECTION']='-5.5'
+os.environ['WORKED_HOURS_CORRECTION'] = '-5.5'
 working_time_interval_with_hour_correction = WorkingTimeInterval()
 
 
@@ -26,6 +26,7 @@ class TestWorkingTimeInterval(unittest.TestCase):
     def test_get_worked_hours_correction_when_specified(self):
         worked_hours_correction = working_time_interval_with_hour_correction.get_worked_hours_correction()
         self.assertEqual(-5.5, worked_hours_correction)
+
 
 if __name__ == '__main__':
     unittest.main()
