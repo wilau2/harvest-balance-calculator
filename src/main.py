@@ -24,7 +24,12 @@ total_worked_time = harvest_time_entries.get_total_worked_time()
 print("total_worked_time")
 print(total_worked_time)
 
-diff = total_worked_time - total_should_have_worked_time
+worked_hours_correction = working_time_interval.get_worked_hours_correction()
+if worked_hours_correction != 0:
+    print("worked_hours_correction")
+    print(worked_hours_correction)
+
+diff = total_worked_time + worked_hours_correction - total_should_have_worked_time
 if diff > 0:
     print("You have some over time")
     print(diff)

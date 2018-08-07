@@ -11,6 +11,7 @@ class WorkingTimeInterval:
         self.working_preference = WorkingPreference()
         self.begin_date = parse(os.environ['BEGIN_DATE']).date()
         self.end_date = parse(os.environ['END_DATE']).date()
+        self.worked_hours_correction = float(os.getenv('WORKED_HOURS_CORRECTION', 0))
 
     def get_number_of_working_days(self):
         delta = (self.end_date - self.begin_date)
@@ -23,3 +24,6 @@ class WorkingTimeInterval:
 
     def get_total_should_have_worked_time(self):
         return self.get_number_of_working_days() * self.working_preference.hours_per_day
+
+    def get_worked_hours_correction(self):
+        return self.worked_hours_correction
