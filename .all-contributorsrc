@@ -40,6 +40,15 @@
         "doc",
         "test"
       ]
+    },
+    {
+      "login": "Etienne-M",
+      "name": "etienne-m",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/26336230?v=4",
+      "profile": "https://github.com/Etienne-M",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
