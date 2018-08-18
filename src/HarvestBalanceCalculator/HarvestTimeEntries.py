@@ -3,7 +3,4 @@ class HarvestTimeEntries:
         self.time_entries = time_entries
 
     def get_total_worked_time(self):
-        total_worked_time = 0
-        for time_entry in self.time_entries:
-            total_worked_time += time_entry["hours"]
-        return total_worked_time
+        return sum(time_entry["hours"] for time_entry in self.time_entries)
