@@ -57,7 +57,7 @@ MIT
 
 [circleci-badge]: https://img.shields.io/circleci/project/github/wilau2/harvest-balance-calculator/master.svg
 [circleci]: https://circleci.com/gh/wilau2/harvest-balance-calculator
-[all-contributors-badge]: https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square
+[all-contributors-badge]: https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square
 [all-contributors]: #contributors
 [codecov-badge]: https://img.shields.io/codecov/c/github/wilau2/harvest-balance-calculator/master.svg
 [codecov]: https://codecov.io/gh/wilau2/harvest-balance-calculator
